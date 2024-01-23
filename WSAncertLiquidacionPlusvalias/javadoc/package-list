@@ -1,0 +1,17 @@
+es.stpa.plusvalias
+es.stpa.plusvalias.datos
+es.stpa.plusvalias.documentos
+es.stpa.plusvalias.domain
+es.stpa.plusvalias.domain.intercambio
+es.stpa.plusvalias.exceptions
+es.stpa.plusvalias.mensajes
+es.stpa.plusvalias.preferencias
+es.stpa.plusvalias.presentacion
+es.stpa.plusvalias.presentacion.pago
+es.stpa.plusvalias.soap
+es.stpa.plusvalias.wssecurity
+es.tributasenasturias.log
+es.tributasenasturias.seguridad.servicio
+es.tributasenasturias.services.lanzador.client
+es.tributasenasturias.services.lanzador.client.response
+es.tributasenasturias.xml

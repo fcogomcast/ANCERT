@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://inti.notariado.org/XML" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://inti.notariado.org/XML" xmlns:intf="http://inti.notariado.org/XML" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	 <wsdl:types>
+
+		  <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://inti.notariado.org/XML" xmlns="http://inti.notariado.org/XML" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+			   <xsd:element name="SERVICE_DISPATCHER">
+
+				    <xsd:complexType>
+
+					     <xsd:sequence>
+
+						      <xsd:element name="TIMESTAMP" type="xsd:dateTime">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Timestamping sobre el envio del mensaje (AAAA-MM-DDThh:mm:ss)        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element name="TIPO_MSJ" type="TIPO_MENSAJEType">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Tipo de mensaje ( &quot;1&quot; Petición, &quot;2&quot; Respuesta)        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element name="EMISOR" type="xsd:string">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Entidad emisora del mensaje (Código de la entidad)        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element fixed="CGN" name="RECEP" type="xsd:string">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Entidad receptora del mensaje (&quot;CGN&quot; Código del CGN)        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element minOccurs="0" name="CUV" type="CODIGO_NOTARIOType">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Código del Notario (Código de Ultimas Voluntades)        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element name="SERVICIO" type="xsd:string">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Código del servicio        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+						      <xsd:element minOccurs="0" name="GENERADOR" type="GENERADORType">
+
+							       <xsd:annotation>
+
+								        <xsd:documentation>
+Bloque con datos relativos al proveedor de la aplicación y a la aplicación generadora del XML        </xsd:documentation>
+
+							       </xsd:annotation>
+
+						      </xsd:element>
+
+					     </xsd:sequence>
+
+				    </xsd:complexType>
+
+			   </xsd:element>
+
+			   <xsd:simpleType name="CODIGO_NOTARIOType">
+
+				    <xsd:restriction base="xsd:string">
+
+					     <xsd:pattern value="[0-9]{7}"/>
+
+				    </xsd:restriction>
+
+			   </xsd:simpleType>
+
+			   <xsd:simpleType name="TIPO_MENSAJEType">
+
+				    <xsd:restriction base="xsd:byte">
+
+					     <xsd:enumeration value="1"/>
+
+					     <xsd:enumeration value="2"/>
+
+				    </xsd:restriction>
+
+			   </xsd:simpleType>
+
+			   <xsd:element name="SERVICE_DISPATCHER_REQUEST">
+
+				    <xsd:complexType>
+
+					     <xsd:sequence>
+
+						      <xsd:any namespace="##any"/>
+
+					     </xsd:sequence>
+
+				    </xsd:complexType>
+
+			   </xsd:element>
+
+			   <xsd:element name="SERVICE_DISPATCHER_RESPONSE">
+
+				    <xsd:complexType>
+
+					     <xsd:sequence>
+
+						      <xsd:any namespace="##any"/>
+
+					     </xsd:sequence>
+
+				    </xsd:complexType>
+
+			   </xsd:element>
+
+			   <xsd:complexType name="ServiceDispatcherException">
+
+				    <xsd:sequence>
+
+					     <xsd:element name="info" nillable="true" type="xsd:string"/>
+
+				    </xsd:sequence>
+
+			   </xsd:complexType>
+
+			   <xsd:element name="fault" type="ServiceDispatcherException"/>
+
+			   <xsd:complexType name="GENERADORType">
+
+				    <xsd:sequence>
+
+					     <xsd:element name="NOMBRE_PROVEEDOR" type="xsd:string">
+
+						      <xsd:annotation>
+
+							       <xsd:documentation>
+Nombre del proveedor de la aplicación       </xsd:documentation>
+
+						      </xsd:annotation>
+
+					     </xsd:element>
+
+					     <xsd:element name="NOMBRE_APLICACION" type="xsd:string">
+
+						      <xsd:annotation>
+
+							       <xsd:documentation>
+Nombre de la aplicación       </xsd:documentation>
+
+						      </xsd:annotation>
+
+					     </xsd:element>
+
+					     <xsd:element name="VERSION_APLICACION" type="xsd:string">
+
+						      <xsd:annotation>
+
+							       <xsd:documentation>
+Versión de la aplicación       </xsd:documentation>
+
+						      </xsd:annotation>
+
+					     </xsd:element>
+
+				    </xsd:sequence>
+
+			   </xsd:complexType>
+
+		  </xsd:schema>
+
+	 </wsdl:types>
+
+	 <wsdl:message name="ServiceDispatcherException">
+
+		  <wsdl:part element="impl:fault" name="fault"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="processResponse">
+
+		  <wsdl:part element="impl:SERVICE_DISPATCHER_RESPONSE" name="processReturn"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="processRequest">
+
+		  <wsdl:part element="impl:SERVICE_DISPATCHER_REQUEST" name="part"/>
+
+		  <wsdl:part element="intf:SERVICE_DISPATCHER" name="request_header"/>
+
+	 </wsdl:message>
+
+	 <wsdl:portType name="ServiceDispatcher">
+                 <jaxws:bindings xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+                <jaxws:class name="ServiceDispatcherANCERT"/>
+                </jaxws:bindings>
+        	  <wsdl:operation name="process">
+
+			   <wsdl:input message="impl:processRequest" name="processRequest"/>
+
+			   <wsdl:output message="impl:processResponse" name="processResponse"/>
+
+			   <wsdl:fault message="impl:ServiceDispatcherException" name="ServiceDispatcherException"/>
+
+		  </wsdl:operation>
+
+	 </wsdl:portType>
+
+	 <wsdl:binding name="ServiceDispatcherSoapBinding" type="impl:ServiceDispatcher">
+
+		  <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		  <wsdl:operation name="process">
+
+			   <wsdlsoap:operation soapAction=""/>
+
+			   <wsdl:input name="processRequest">
+
+				    <wsdlsoap:header message="intf:processRequest" part="request_header" use="literal"/>
+
+				    <wsdlsoap:body parts="part" use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="processResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+			   <wsdl:fault name="ServiceDispatcherException">
+
+				    <wsdlsoap:fault name="ServiceDispatcherException" use="literal"/>
+
+			   </wsdl:fault>
+
+		  </wsdl:operation>
+
+	 </wsdl:binding>
+
+	 <wsdl:service name="ServiceDispatcherService">
+
+		  <wsdl:port binding="impl:ServiceDispatcherSoapBinding" name="ServiceDispatcher">
+
+			   <wsdlsoap:address location="http://bus:7001/WSANCERT/ProxyServices/PXServiceDispatcher"/>
+
+		  </wsdl:port>
+
+	 </wsdl:service>
+
+</wsdl:definitions>
+

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="remesa">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="declaracion">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="modoPlusvalia" type="xs:string" />
+                            <xs:element name="fecDev" type="xs:string" />
+                            <xs:element name="fecPres" type="xs:string" />
+                            <xs:element name="datoEspecifico" type="xs:string" />
+                            <xs:element name="fechaDevengoConcatenada" type="xs:string" />
+                            <xs:element name="fechaDevengoTransmision" type="xs:string" />
+                            <xs:element name="valorSuelo" type="xs:string" />
+                            <xs:element name="valorSueloActu" type="xs:string" />
+                            <xs:element name="percParticipacion" type="xs:string" />
+                            <xs:element name="edadUV" type="xs:string"/>
+                            <xs:element name="tiempoUT" type="xs:string"/>
+                            <xs:element name="tiempoUH" type="xs:string"/>
+                            <xs:element name="edadUTH" type="xs:string"/>
+                            <xs:element name="valorCatastral" type="xs:string" />
+                            <xs:element name="valorCatastralActu" type="xs:string" />
+                            <xs:element name="baseImpoDirecta" type="xs:string" />
+                            <xs:element name="valorCompra" type="xs:string" />
+                            <xs:element name="valorVenta" type="xs:string" />
+                            <xs:element name="biElegida" type="xs:string" />
+                            <xs:element name="justiprecio_valTerreno" type="xs:string"/>
+                            <xs:element name="cod_tipoPlusvalia" type="xs:string" />
+                            <xs:element name="cod_causaPlusvalia" type="xs:string" />
+                            <xs:element name="cod_objetoOperacionPlusvalia" type="xs:string" />
+                            <xs:element name="nom_tipoPlusvalia" type="xs:string" />
+                            <xs:element name="nom_causaPlusvalia" type="xs:string" />
+                            <xs:element name="nom_objetoOperacionPlusvalia" type="xs:string" />
+                            <xs:element name="municipioPlusvalia" type="xs:string" />
+                            <xs:element name="municipioPlusvaliaDesc" type="xs:string"/>
+                            <xs:element name="porcReduccion" type="xs:string"/>
+                            <xs:element name="valorTerreno" type="xs:string" />
+                            <xs:element name="deducciones" type="xs:string"/>
+                            <xs:element name="supBonificado" type="xs:string" />
+                            <xs:element name="residente" type="xs:string" />
+                            <xs:element name="porcBonificacionCuota" type="xs:string" />
+                            <xs:element name="booleanPorcReferenciaCatastralSuelo" />
+                            <xs:element name="porcReferenciaCatastralSuelo" type="xs:string" />
+                            <xs:element name="tipoAuto" type="xs:string" />
+                            <xs:element name="autoliquidacionComplementaria" type="xs:string"/>
+                            <xs:element name="nroPrimeraAutoliquidacion" type="xs:string"/>
+                            <xs:element name="fechaPresentacionComplementaria" type="xs:string"/>
+                            <xs:element name="importeLiquidacionAnterior" type="xs:string"/>
+                            <xs:element name="baseLiquidable" type="xs:string" />
+                            <xs:element name="baseImponible" type="xs:string" />
+                            <xs:element name="cuotaResultante" type="xs:string" />
+                            <xs:element name="aIngresar" type="xs:string" />
+                            <xs:element name="sujecion" type="xs:string" />
+                            <xs:element name="fundamentoSujecion" type="xs:string" />
+                            <xs:element name="codRequisito" type="xs:string" />
+                            <xs:element name="aplicaRecargoDemora" type="xs:string" />
+                            <xs:element name="recargo" type="xs:string" />
+                            <xs:element name="interesesDemora" type="xs:string" />
+                            <xs:element name="porcRecargo" type="xs:string"/>
+                            <xs:element name="RET" type="xs:string" />
+                            <xs:element name="fecFinPeriodo" type="xs:string"/>
+                            <xs:element name="CFL" type="xs:string" />
+                            <xs:element name="refCatastral" type="xs:string" />
+                            <xs:element name="refCatastral_1" type="xs:string" />
+                            <xs:element name="refCatastral_2" type="xs:string" />
+                            <xs:element name="refCatastral_3" type="xs:string" />
+                            <xs:element name="refCatastral_4" type="xs:string" />
+                            <xs:element name="refCatastral_DC" type="xs:string" />
+                            <xs:element name="anyorev" type="xs:string" />
+                            <xs:element name="anyovalcat" type="xs:string" />
+                            <xs:element name="numeroFijo" type="xs:string" />
+                            <xs:element name="codvia" type="xs:string" />
+                            <xs:element name="duplicado" type="xs:string"/>
+                            <xs:element name="lista_intervinientes">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="interviniente">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="nif" type="xs:string" />
+                                                    <xs:element name="nombre_razonsocial" type="xs:string" />
+                                                    <xs:element name="provincia" type="xs:string" />
+                                                    <xs:element name="provinciaDesc" type="xs:string" />
+                                                    <xs:element name="municipio" type="xs:string" />
+                                                    <xs:element name="municipioDesc" type="xs:string" />
+                                                    <xs:element name="siglas" type="xs:string" />
+                                                    <xs:element name="siglasDesc" type="xs:string" />
+                                                    <xs:element name="nombre_via" type="xs:string" />
+                                                    <xs:element name="numero" type="xs:string"/>
+                                                    <xs:element name="escalera" type="xs:string"/>
+                                                    <xs:element name="piso" type="xs:string"/>
+                                                    <xs:element name="puerta" type="xs:string"/>
+                                                    <xs:element name="cp" type="xs:string" />
+                                                    <xs:element name="telf" type="xs:string"/>
+                                                    <xs:element name="partic_igual" type="xs:string" />
+                                                    <xs:element name="grdo_partic" type="xs:string" />
+                                                    <xs:element name="pais" type="xs:string" />
+                                                    <xs:element name="paisDesc" type="xs:string" />
+                                                    <xs:element name="locali_fuera_esp" />
+                                                    <xs:element name="relacion" type="xs:string" />
+                                                    <xs:element name="fec_nacimiento" type="xs:string"/>
+                                                    <xs:element name="parentesco" type="xs:string"/>
+                                                    <xs:element name="parentescoDesc" type="xs:string"/>
+                                                    <xs:element name="grupo" type="xs:string"/>
+                                                    <xs:element name="patrimonio" type="xs:string"/>
+                                                    <xs:element name="patrimonioDesc" type="xs:string"/>
+                                                    <xs:element name="impte_patrimonio" type="xs:string" />
+                                                    <xs:element name="minusvalia" type="xs:string" />
+                                                    <xs:element name="grdo_minusvalia" type="xs:string" />
+                                                    <xs:element name="suscri_declara" type="xs:string" />
+                                                    <xs:element name="fec_fallecimiento" type="xs:string"/>
+                                                    <xs:element name="no_sujeto_prescrito" type="xs:string"/>
+                                                    <xs:element name="no_sujeto_prescritoDesc" />
+                                                    <xs:element name="num_presentacion_ant" type="xs:string"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="tipo" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Identificacion">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="FechaDevengo" type="xs:string" />
+                                        <xs:element name="DocNotarial" type="xs:string" />
+                                        <xs:element name="DocJudicial" type="xs:string" />
+                                        <xs:element name="DocPrivado" type="xs:string" />
+                                        <xs:element name="DocAdministrativo" type="xs:string" />
+                                        <xs:element name="DocMercantil" type="xs:string" />
+                                        <xs:element name="Notario" type="xs:string"/>
+                                        <xs:element name="ApellidosNotario" type="xs:string"/>
+                                        <xs:element name="CodNotario" type="xs:string"/>
+                                        <xs:element name="CodNotaria" type="xs:string"/>
+                                        <xs:element name="ProvinciaNotario" type="xs:string"/>
+                                        <xs:element name="ProvinciaNotarioDesc" type="xs:string"/>
+                                        <xs:element name="MunicipioNotario" type="xs:string"/>
+                                        <xs:element name="MunicipioNotarioDesc" type="xs:string"/>
+                                        <xs:element name="NumProtocolo" type="xs:string" />
+                                        <xs:element name="NumProtocoloBis" type="xs:string"/>
+                                        <xs:element name="FechaDocumento" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="lista_bienes_urbanos">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="bien_urbano" minOccurs="1" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="IDBien" type="xs:string"/>
+                                                    <xs:element name="Transmision" type="xs:string" />
+                                                    <xs:element name="Caracter" type="xs:string" />
+                                                    <xs:element name="tipo" type="xs:string"/>
+                                                    <xs:element name="tipoDesc" type="xs:string"/>
+                                                    <xs:element name="ClaveAdquisicion" type="xs:string" />
+                                                    <xs:element name="ClaveAdquisicionDesc" type="xs:string" />
+                                                    <xs:element name="via" type="xs:string" />
+                                                    <xs:element name="viaDesc" type="xs:string" />
+                                                    <xs:element name="NombreVia" type="xs:string" />
+                                                    <xs:element name="Numero" type="xs:string" />
+                                                    <xs:element name="Escalera" type="xs:string" />
+                                                    <xs:element name="Piso" type="xs:string" />
+                                                    <xs:element name="Puerta" type="xs:string" />
+                                                    <xs:element name="provincia" type="xs:string" />
+                                                    <xs:element name="provinciaDesc" type="xs:string" />
+                                                    <xs:element name="municipio" type="xs:string" />
+                                                    <xs:element name="municipioDesc" type="xs:string" />
+                                                    <xs:element name="codigoPostal" type="xs:string"/>
+                                                    <xs:element name="SuperficieConstruida" type="xs:string"/>
+                                                    <xs:element name="anoConstruccion" type="xs:string"/>
+                                                    <xs:element name="ReferenciaCatastral" type="xs:string" />
+                                                    <xs:element name="VPO" type="xs:string" />
+                                                    <xs:element name="FechaAdquisicion" type="xs:string"/>
+                                                    <xs:element name="VariasFechas" type="xs:string" />
+                                                    <xs:element name="ViviendaHabitual" type="xs:string" />
+                                                    <xs:element name="ValorBien" type="xs:string" />
+                                                    <xs:element name="DonacTempo" type="xs:string" />
+                                                    <xs:element name="AnyosDonaTemp" type="xs:string" />
+                                                    <xs:element name="DonacVitalicia" type="xs:string" />
+                                                    <xs:element name="FechaNacMenDonatario" type="xs:string"/>
+                                                    <xs:element name="PorcClaveAdquisicion" type="xs:string" />
+                                                    <xs:element name="TipoImpositivo" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="lista_datos_venta">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="datos_venta" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="posicion" type="xs:string" />
+                                                    <xs:element name="fechaAdquisicion" type="xs:string" />
+                                                    <xs:element name="anyos" type="xs:string" />
+                                                    <xs:element name="porcAdquisicion" type="xs:string" />
+                                                    <xs:element name="porcTenencia" type="xs:string" />
+                                                    <xs:element name="porcXTenencia" type="xs:string" />
+                                                    <xs:element name="baseImponible" type="xs:string" />
+                                                    <xs:element name="tipoImpositivo" type="xs:string" />
+                                                    <xs:element name="cuotaLiquidacion" type="xs:string" />
+                                                </xs:sequence>
+                                                <xs:attribute name="id" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="codigo" type="xs:string" use="required" />
+                        <xs:attribute name="modelo" type="xs:string" use="required" />
+                        <xs:attribute name="version_xsd_modelo" type="xs:string" use="required" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="codigo" type="xs:string" use="required" />
+            <xs:attribute name="fec_emision" type="xs:string" use="required" />
+            <xs:attribute name="total_decl" type="xs:string" use="required" />
+            <xs:attribute name="version_xsd" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/TPAJD/diligencia" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dil="http://inti.notariado.org/XML/TPAJD/diligencia" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="RESULTADO">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TIPO_ERROR" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Boleano (true/false o 1/0) que indica si se ha producido alg_ror</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CODIGO_ERROR" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Codigo del error conocido y tipificado en tabla de errores</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TEXTO_ERROR" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Texto de error no tipificado en tabla de errores</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

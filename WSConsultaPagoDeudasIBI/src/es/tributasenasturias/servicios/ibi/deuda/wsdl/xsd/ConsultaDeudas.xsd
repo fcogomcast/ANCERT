@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/CD" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML/CD" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Peticion de consulta efectuada por SSCC a un Organismo Tributario.-->
+	<xs:include schemaLocation="Tipos.xsd"/>
+	<xs:include schemaLocation="Common-deudas.xsd"/>
+	<xs:element name="CONSULTA_DEUDAS">
+		<xs:annotation>
+			<xs:documentation>Mensajeria para la consulta de deudas de IBI</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="REQUEST">
+						<xs:annotation>
+							<xs:documentation>Petición de consulta de deudas realizada por el notario</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA" type="CABECERAType">
+									<xs:annotation>
+										<xs:documentation>Cabecera del mensaje</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ID_NOTARIO" type="ID_NOTARIOType">
+									<xs:annotation>
+										<xs:documentation>Identificacion del notario</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="PARAMETROS_CONSULTA" type="PARAMETROS_CONSULTAType">
+									<xs:annotation>
+										<xs:documentation>Parametros de la consulta de deudas</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="REPLY">
+						<xs:annotation>
+							<xs:documentation>Respuesta del ayuntamiento a la consulta de deudas</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA" type="CABECERAType">
+									<xs:annotation>
+										<xs:documentation>Cabecera del mensaje</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="DATOS" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Si el mensaje es de error, se omite este bloque </xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="IBI_ANYO_ACTUAL">
+												<xs:annotation>
+													<xs:documentation>Este campo indica si el Ayuntamiento ha tramitado ya o no el recibo del IBI correspondiente al ejercicio en curso. ‘S’ para cuando lo haya tramitado ‘N’ en caso contrario.</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="S"/>
+														<xs:enumeration value="N"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="ID_INMUEBLE">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="UBICACION">
+															<xs:complexType>
+																<xs:choice>
+																	<xs:sequence>
+																		<xs:element name="TIPO_CALLE">
+																			<xs:annotation>
+																				<xs:documentation>Los códigos de tipo calle seran los facilitados por catastro.</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="10"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="CALLE">
+																			<xs:annotation>
+																				<xs:documentation>Nombre de la calle</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="200"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="NUMERO" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Numero del inmueble en la calle</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:minLength value="1"/>
+																					<xs:maxLength value="4"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="ESCALERA" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Numero/Letra de la escalera para edificios con varias escaleras en el mismo Número</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="3"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PISO" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Numero de planta</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="200"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PUERTA" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Número de puerta en el piso del bloque</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="3"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="BLOQUE" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Número/Letra del bloque para urbanizaciones son número específico o con número genérico.</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="2"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="DUP" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Duplicado</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="1"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PORTAL_BLOQUE" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Número del portal del bloque de edificio</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="2"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PUERTA_GENERICA" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>El de puerta genérica</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="2"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="PUERTA_ESPECIFICA" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>Puerta específica</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="xs:string">
+																					<xs:whiteSpace value="collapse"/>
+																					<xs:maxLength value="2"/>
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																		<xs:element name="KILOMETRO" minOccurs="0">
+																			<xs:annotation>
+																				<xs:documentation>El número de kilómetro para direcciones fura del casco urbano</xs:documentation>
+																			</xs:annotation>
+																			<xs:simpleType>
+																				<xs:restriction base="CANTIDAD">
+																					<xs:minLength value="1"/>
+																				</xs:restriction>
+																			</xs:simpleType>
+																		</xs:element>
+																	</xs:sequence>
+																	<xs:element name="CONCATENACION">
+																		<xs:annotation>
+																			<xs:documentation>Datos de localización de la finca concatenada en un solo string para solucionar comunicaciones con Ayuntamientos que no dispongan de tratamiento individualizado de Campos de Localización</xs:documentation>
+																		</xs:annotation>
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:maxLength value="630"/>
+																				<xs:minLength value="1"/>
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																</xs:choice>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="TIPO_FINCA">
+															<xs:annotation>
+																<xs:documentation>Describe el tipo de uso que tiene el edificio (Vivienda, Garaje, parking, Industrial, local comercial, etc).</xs:documentation>
+															</xs:annotation>
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:whiteSpace value="collapse"/>
+																	<xs:maxLength value="30"/>
+																	<xs:minLength value="1"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="SUPERFICIE" type="CANTIDAD">
+															<xs:annotation>
+																<xs:documentation>Indica la superficie del solar donde se ubica el Inmueble si el valor catastral es el fijado para el terreno del que es parte integrante.</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="LISTA_DEUDAS" type="LISTA_DEUDASType"/>
+											<xs:element name="DOCUMENTO_JUSTIFICANTE" type="xs:base64Binary">
+												<xs:annotation>
+													<xs:documentation>Documento justificante con el detalle de las deudas en formato PDF en Base64 y generado por el Ayuntamiento (se entrega al cliente).</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="DEUDA_LIQUIDABLE" type="xs:boolean">
+												<xs:annotation>
+													<xs:documentation>La deuda no será liquidable si  existiera alguna otra deuda anterior de ambito municipal.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:choice minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Datos adicionales necesarios para los casos que ANCERT gestione el pago.</xs:documentation>
+												</xs:annotation>
+												<xs:element name="DATOS_PAGO_RED_ES">
+													<xs:annotation>
+														<xs:documentation>Datos que se enviarán a Red.es para efectuar el pago mediante cuaderno 60_2 (solo se informaran si el pago lo gestiona ANCERT y no el propio ayuntamiento)</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="REFERENCIA" type="REFERENCIAType">
+																<xs:annotation>
+																	<xs:documentation>Identificador de 12 dígitos que identifica la operación</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="CODIGO_TRIBUTO" type="CODIGO_TRIBUTOType">
+																<xs:annotation>
+																	<xs:documentation>El identificador discriminante para que una misma Emisora pueda efectuar recaudaciones diferenciadas, esto es, para diferentes tributos.001 Impuesto sobre bienes inmuebles (Urbana)
+002 Impuesto sobre bienes inmuebles (Rústica)
+004 Impuesto sobre incremento del valor de los terrenos</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="EJERCICIO">
+																<xs:simpleType>
+																	<xs:restriction base="xs:integer">
+																		<xs:pattern value="\d{2}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="DIGITO_ANYO">
+																<xs:annotation>
+																	<xs:documentation>ültimo dígito del año</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:integer">
+																		<xs:minInclusive value="0"/>
+																		<xs:maxInclusive value="9"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="FECHA">
+																<xs:annotation>
+																	<xs:documentation>Fecha juliana</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="3"/>
+																		<xs:pattern value="\d{3}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="DISCRIMINANTE_PERIODO" type="DISCRIMINANTE_PERIODOType">
+																<xs:annotation>
+																	<xs:documentation>Dígito discriminante periodo, que admite los siguientes valores:
+1 - cuando en el tributo figure un único período de
+pago e importe.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="IMPORTE">
+																<xs:annotation>
+																	<xs:documentation>El importe a pagar. Se especifica en céntimos de euro (por ejemplo, 125 € se indicaría como 000000012500).</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="12"/>
+																		<xs:pattern value="\d{12}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="CODIGO_ORGANISMO_EMISOR">
+																<xs:annotation>
+																	<xs:documentation>Identificador del Organismo que realiza la emisión o gestión de la recaudación de las autoliquidaciones / recibos. Las 2 primeras cifras se asignan al Organismo, según el BOE 07/02/1989. Este código debe ajustarse a los reconocidos por la AEB/CECA, y en caso de necesitar uno nuevo habría que contactar con AEB/CECA para obtenerlo.</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="6"/>
+																		<xs:pattern value="\d{6}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+												<xs:element name="DATOS_PAGO_CAM">
+													<xs:annotation>
+														<xs:documentation>Datos que se enviaran a CAM para el pago de deudas IBI de municipios gestionados por la Región de Murcia (CARM).</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="IMPORTE" type="xs:long">
+																<xs:annotation>
+																	<xs:documentation>Importe del pago en centimos de Euro.</xs:documentation>
+																</xs:annotation>
+															</xs:element>
+															<xs:element name="N28">
+																<xs:annotation>
+																	<xs:documentation>Numero de justificante para la generación del CCT</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:pattern value="\d{28}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:choice>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="RESULTADO" type="RESULTADOType">
+									<xs:annotation>
+										<xs:documentation>Resultado de la petición (OK o ERROR)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:any namespace="##any" processContents="lax" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Firma del nodo REQUEST o REPLY siguiendo el estándar XADES (IMPORTANTE: solo se requiere esta firma en las integraciones via POST).</xs:documentation>
+					</xs:annotation>
+				</xs:any>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

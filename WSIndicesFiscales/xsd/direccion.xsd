@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definción de tipos y grupos para la dirección postal</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="DIRECCIONType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:group ref="GRUPO_NORMALIZADA"/>
+			<xs:group ref="GRUPO_NO_NORMALIZADA"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_NORMALIZADAType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal normalizada</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="GRUPO_NORMALIZADA"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_IND_FISCALType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal usado para el índice fiscal</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:group ref="GRUPO_NORMALIZADA"/>
+			<xs:group ref="GRUPO_NO_NORMALIZADA_EXTRANJERA"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_IND_PLUSVALIASType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal usado para el índice de plusvalias</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:group ref="GRUPO_NORMALIZADA_PLUSVALIAS"/>
+			<xs:group ref="GRUPO_NO_NORMALIZADA"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_NO_RESIDENTEType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal para extranjeros</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="GRUPO_NORMALIZADA" minOccurs="0"/>
+			<xs:group ref="GRUPO_EXTRANJERA"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_INMUEBLEType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal de los inmuebles</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:group ref="GRUPO_NORMALIZADA_INMUEBLE"/>
+			<xs:element name="COD_PAIS">
+				<xs:annotation>
+					<xs:documentation>Código de país, según codificación oficial de Países y Territorios aprobada por OM 9-12-99. No especificar en el caso de España</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{3}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DIRECCION_INMUEBLE_IND_CATASTRALType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la dirección postal de los inmuebles</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="GRUPO_NORMALIZADA_INMUEBLE"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="GRUPO_NORMALIZADA">
+		<xs:sequence>
+			<xs:element name="TIPO_VIA">
+				<xs:annotation>
+					<xs:documentation>Tipo de vía (sigla). Según tabla del Catastro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="AG"/>
+						<xs:enumeration value="AL"/>
+						<xs:enumeration value="AR"/>
+						<xs:enumeration value="AU"/>
+						<xs:enumeration value="AV"/>
+						<xs:enumeration value="AY"/>
+						<xs:enumeration value="BJ"/>
+						<xs:enumeration value="BO"/>
+						<xs:enumeration value="BR"/>
+						<xs:enumeration value="CA"/>
+						<xs:enumeration value="CG"/>
+						<xs:enumeration value="CH"/>
+						<xs:enumeration value="CI"/>
+						<xs:enumeration value="CJ"/>
+						<xs:enumeration value="CL"/>
+						<xs:enumeration value="CM"/>
+						<xs:enumeration value="CN"/>
+						<xs:enumeration value="CO"/>
+						<xs:enumeration value="CP"/>
+						<xs:enumeration value="CR"/>
+						<xs:enumeration value="CS"/>
+						<xs:enumeration value="CT"/>
+						<xs:enumeration value="CU"/>
+						<xs:enumeration value="DE"/>
+						<xs:enumeration value="DP"/>
+						<xs:enumeration value="DS"/>
+						<xs:enumeration value="ED"/>
+						<xs:enumeration value="EM"/>
+						<xs:enumeration value="EN"/>
+						<xs:enumeration value="ER"/>
+						<xs:enumeration value="ES"/>
+						<xs:enumeration value="EX"/>
+						<xs:enumeration value="FC"/>
+						<xs:enumeration value="FN"/>
+						<xs:enumeration value="GL"/>
+						<xs:enumeration value="GR"/>
+						<xs:enumeration value="GV"/>
+						<xs:enumeration value="HT"/>
+						<xs:enumeration value="JR"/>
+						<xs:enumeration value="LD"/>
+						<xs:enumeration value="LG"/>
+						<xs:enumeration value="MC"/>
+						<xs:enumeration value="ML"/>
+						<xs:enumeration value="MN"/>
+						<xs:enumeration value="MS"/>
+						<xs:enumeration value="MT"/>
+						<xs:enumeration value="MZ"/>
+						<xs:enumeration value="PQ"/>
+						<xs:enumeration value="PB"/>
+						<xs:enumeration value="PD"/>
+						<xs:enumeration value="PJ"/>
+						<xs:enumeration value="PL"/>
+						<xs:enumeration value="PM"/>
+						<xs:enumeration value="PR"/>
+						<xs:enumeration value="PS"/>
+						<xs:enumeration value="PT"/>
+						<xs:enumeration value="PZ"/>
+						<xs:enumeration value="QT"/>
+						<xs:enumeration value="RB"/>
+						<xs:enumeration value="RC"/>
+						<xs:enumeration value="RD"/>
+						<xs:enumeration value="RM"/>
+						<xs:enumeration value="RP"/>
+						<xs:enumeration value="RR"/>
+						<xs:enumeration value="RU"/>
+						<xs:enumeration value="SA"/>
+						<xs:enumeration value="SD"/>
+						<xs:enumeration value="SL"/>
+						<xs:enumeration value="SN"/>
+						<xs:enumeration value="SU"/>
+						<xs:enumeration value="TN"/>
+						<xs:enumeration value="TO"/>
+						<xs:enumeration value="TR"/>
+						<xs:enumeration value="UR"/>
+						<xs:enumeration value="VR"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VIA">
+				<xs:annotation>
+					<xs:documentation>Nombre de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NUM_VIA">
+				<xs:annotation>
+					<xs:documentation>Número de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DUPLICADO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Duplicado</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="BLOQUE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bloque</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ESCALERA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Escalera</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PLANTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Planta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PUERTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Puerta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="3"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RESTO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Resto dirección no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="APROX_KM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aproximación postal en kilometro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PEDANIA" type="PEDANIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la entidad menor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_MUN" type="CODIGO_MUNICIPIOType">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MUN" type="MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType">
+				<xs:annotation>
+					<xs:documentation>Código INE de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROV" type="PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CP">
+				<xs:annotation>
+					<xs:documentation>Código postal</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{5}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_NORMALIZADA_PLUSVALIAS">
+		<xs:sequence>
+			<xs:element name="TIPO_VIA">
+				<xs:annotation>
+					<xs:documentation>Tipo de vía (sigla). Según tabla del Catastro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="AG"/>
+						<xs:enumeration value="AL"/>
+						<xs:enumeration value="AR"/>
+						<xs:enumeration value="AU"/>
+						<xs:enumeration value="AV"/>
+						<xs:enumeration value="AY"/>
+						<xs:enumeration value="BJ"/>
+						<xs:enumeration value="BO"/>
+						<xs:enumeration value="BR"/>
+						<xs:enumeration value="CA"/>
+						<xs:enumeration value="CG"/>
+						<xs:enumeration value="CH"/>
+						<xs:enumeration value="CI"/>
+						<xs:enumeration value="CJ"/>
+						<xs:enumeration value="CL"/>
+						<xs:enumeration value="CM"/>
+						<xs:enumeration value="CN"/>
+						<xs:enumeration value="CO"/>
+						<xs:enumeration value="CP"/>
+						<xs:enumeration value="CR"/>
+						<xs:enumeration value="CS"/>
+						<xs:enumeration value="CT"/>
+						<xs:enumeration value="CU"/>
+						<xs:enumeration value="DE"/>
+						<xs:enumeration value="DP"/>
+						<xs:enumeration value="DS"/>
+						<xs:enumeration value="ED"/>
+						<xs:enumeration value="EM"/>
+						<xs:enumeration value="EN"/>
+						<xs:enumeration value="ER"/>
+						<xs:enumeration value="ES"/>
+						<xs:enumeration value="EX"/>
+						<xs:enumeration value="FC"/>
+						<xs:enumeration value="FN"/>
+						<xs:enumeration value="GL"/>
+						<xs:enumeration value="GR"/>
+						<xs:enumeration value="GV"/>
+						<xs:enumeration value="HT"/>
+						<xs:enumeration value="JR"/>
+						<xs:enumeration value="LD"/>
+						<xs:enumeration value="LG"/>
+						<xs:enumeration value="MC"/>
+						<xs:enumeration value="ML"/>
+						<xs:enumeration value="MN"/>
+						<xs:enumeration value="MS"/>
+						<xs:enumeration value="MT"/>
+						<xs:enumeration value="MZ"/>
+						<xs:enumeration value="PQ"/>
+						<xs:enumeration value="PB"/>
+						<xs:enumeration value="PD"/>
+						<xs:enumeration value="PJ"/>
+						<xs:enumeration value="PL"/>
+						<xs:enumeration value="PM"/>
+						<xs:enumeration value="PR"/>
+						<xs:enumeration value="PS"/>
+						<xs:enumeration value="PT"/>
+						<xs:enumeration value="PZ"/>
+						<xs:enumeration value="QT"/>
+						<xs:enumeration value="RB"/>
+						<xs:enumeration value="RC"/>
+						<xs:enumeration value="RD"/>
+						<xs:enumeration value="RM"/>
+						<xs:enumeration value="RP"/>
+						<xs:enumeration value="RR"/>
+						<xs:enumeration value="RU"/>
+						<xs:enumeration value="SA"/>
+						<xs:enumeration value="SD"/>
+						<xs:enumeration value="SL"/>
+						<xs:enumeration value="SN"/>
+						<xs:enumeration value="SU"/>
+						<xs:enumeration value="TN"/>
+						<xs:enumeration value="TO"/>
+						<xs:enumeration value="TR"/>
+						<xs:enumeration value="UR"/>
+						<xs:enumeration value="VR"/>
+						<xs:enumeration value=""/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VIA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NUM_VIA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DUPLICADO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Duplicado</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="BLOQUE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bloque</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ESCALERA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Escalera</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PLANTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Planta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PUERTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Puerta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="3"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RESTO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Resto dirección no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="APROX_KM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aproximación postal en kilometro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PEDANIA" type="PEDANIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la entidad menor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_MUN" type="CODIGO_MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MUN" type="MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código INE de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROV" type="PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CP" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código postal</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{5}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_NORMALIZADA_INMUEBLE">
+		<xs:sequence>
+			<xs:element name="TIPO_VIA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo de vía (sigla). Según tabla del Catastro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="AG"/>
+						<xs:enumeration value="AL"/>
+						<xs:enumeration value="AR"/>
+						<xs:enumeration value="AU"/>
+						<xs:enumeration value="AV"/>
+						<xs:enumeration value="AY"/>
+						<xs:enumeration value="BJ"/>
+						<xs:enumeration value="BO"/>
+						<xs:enumeration value="BR"/>
+						<xs:enumeration value="CA"/>
+						<xs:enumeration value="CG"/>
+						<xs:enumeration value="CH"/>
+						<xs:enumeration value="CI"/>
+						<xs:enumeration value="CJ"/>
+						<xs:enumeration value="CL"/>
+						<xs:enumeration value="CM"/>
+						<xs:enumeration value="CN"/>
+						<xs:enumeration value="CO"/>
+						<xs:enumeration value="CP"/>
+						<xs:enumeration value="CR"/>
+						<xs:enumeration value="CS"/>
+						<xs:enumeration value="CT"/>
+						<xs:enumeration value="CU"/>
+						<xs:enumeration value="DE"/>
+						<xs:enumeration value="DP"/>
+						<xs:enumeration value="DS"/>
+						<xs:enumeration value="ED"/>
+						<xs:enumeration value="EM"/>
+						<xs:enumeration value="EN"/>
+						<xs:enumeration value="ER"/>
+						<xs:enumeration value="ES"/>
+						<xs:enumeration value="EX"/>
+						<xs:enumeration value="FC"/>
+						<xs:enumeration value="FN"/>
+						<xs:enumeration value="GL"/>
+						<xs:enumeration value="GR"/>
+						<xs:enumeration value="GV"/>
+						<xs:enumeration value="HT"/>
+						<xs:enumeration value="JR"/>
+						<xs:enumeration value="LD"/>
+						<xs:enumeration value="LG"/>
+						<xs:enumeration value="MC"/>
+						<xs:enumeration value="ML"/>
+						<xs:enumeration value="MN"/>
+						<xs:enumeration value="MS"/>
+						<xs:enumeration value="MT"/>
+						<xs:enumeration value="MZ"/>
+						<xs:enumeration value="PQ"/>
+						<xs:enumeration value="PB"/>
+						<xs:enumeration value="PD"/>
+						<xs:enumeration value="PJ"/>
+						<xs:enumeration value="PL"/>
+						<xs:enumeration value="PM"/>
+						<xs:enumeration value="PR"/>
+						<xs:enumeration value="PS"/>
+						<xs:enumeration value="PT"/>
+						<xs:enumeration value="PZ"/>
+						<xs:enumeration value="QT"/>
+						<xs:enumeration value="RB"/>
+						<xs:enumeration value="RC"/>
+						<xs:enumeration value="RD"/>
+						<xs:enumeration value="RM"/>
+						<xs:enumeration value="RP"/>
+						<xs:enumeration value="RR"/>
+						<xs:enumeration value="RU"/>
+						<xs:enumeration value="SA"/>
+						<xs:enumeration value="SD"/>
+						<xs:enumeration value="SL"/>
+						<xs:enumeration value="SN"/>
+						<xs:enumeration value="SU"/>
+						<xs:enumeration value="TN"/>
+						<xs:enumeration value="TO"/>
+						<xs:enumeration value="TR"/>
+						<xs:enumeration value="UR"/>
+						<xs:enumeration value="VR"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="VIA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NUM_VIA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de la vía</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DUPLICADO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Duplicado</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="1"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="BLOQUE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bloque</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="4"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ESCALERA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Escalera</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PLANTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Planta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PUERTA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Puerta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="3"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RESTO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Resto dirección no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="25"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="APROX_KM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aproximación postal en kilometro</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="6"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PEDANIA" type="PEDANIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la entidad menor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_MUN" type="CODIGO_MUNICIPIOType">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MUN" type="MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType">
+				<xs:annotation>
+					<xs:documentation>Código INE de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROV" type="PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CP" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código postal</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{5}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_NO_NORMALIZADA">
+		<xs:sequence>
+			<xs:element name="DIR_NO_NORM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección postal no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PEDANIA" type="PEDANIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la entidad menor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_MUN" type="CODIGO_MUNICIPIOType">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MUN" type="MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType">
+				<xs:annotation>
+					<xs:documentation>Código INE de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROV" type="PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_NO_NORMALIZADA_IND_FISCAL">
+		<xs:sequence>
+			<xs:element name="PEDANIA" type="PEDANIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la entidad menor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_MUN" type="CODIGO_MUNICIPIOType">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MUN" type="MUNICIPIOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del municipio</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType">
+				<xs:annotation>
+					<xs:documentation>Código INE de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PROV" type="PROVINCIAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre de la provincia</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_EXTRANJERA">
+		<xs:sequence>
+			<xs:element name="DIR_NO_NORM">
+				<xs:annotation>
+					<xs:documentation>Dirección postal no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="COD_PAIS">
+				<xs:annotation>
+					<xs:documentation>Código de país, según codificación oficial de Países y Territorios aprobada por OM 9-12-99. No especificar en el caso de España</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{3}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PAIS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del país</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_EXTRANJERA_IND_FISCAL">
+		<xs:sequence>
+			<xs:element name="COD_PAIS">
+				<xs:annotation>
+					<xs:documentation>Código de país, según codificación oficial de Países y Territorios aprobada por OM 9-12-99. No especificar en el caso de España</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{3}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PAIS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre del país</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="GRUPO_NO_NORMALIZADA_EXTRANJERA">
+		<xs:sequence>
+			<xs:element name="DIR_NO_NORM" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dirección postal no estructurada</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="60"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:group ref="GRUPO_EXTRANJERA_IND_FISCAL"/>
+				<xs:group ref="GRUPO_NO_NORMALIZADA_IND_FISCAL"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="PEDANIAType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MUNICIPIOType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PROVINCIAType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_MUNICIPIOType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_PROVINCIAType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="COMUNIDAD_AUTONOMAType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+			<xs:enumeration value="20"/>
+			<xs:enumeration value="21"/>
+			<xs:enumeration value="22"/>
+			<xs:enumeration value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s0:definitions name="wsFirmaDigital" targetNamespace="http://localhost:7001" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://localhost:7001" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:7001" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://localhost:7001" schemaLocation="XSDFirmaDigital.xsd"/>
+    </xsd:schema>
+  </s0:types>
+  <s0:message name="Firmar">
+    <s0:part element="s1:Firmar" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarResponse">
+    <s0:part element="s1:FirmarResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="Exception">
+    <s0:part element="s1:Exception" name="fault"/>
+  </s0:message>
+  <s0:message name="Validar">
+    <s0:part element="s1:Validar" name="parameters"/>
+  </s0:message>
+  <s0:message name="ValidarResponse">
+    <s0:part element="s1:ValidarResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="InsertarCertificado">
+    <s0:part element="s1:InsertarCertificado" name="parameters"/>
+  </s0:message>
+  <s0:message name="InsertarCertificadoResponse">
+    <s0:part element="s1:InsertarCertificadoResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarSOAP">
+    <s0:part element="s1:FirmarSOAP" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarSOAPResponse">
+    <s0:part element="s1:FirmarSOAPResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarAncert">
+    <s0:part element="s1:FirmarAncert" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarAncertResponse">
+    <s0:part element="s1:FirmarAncertResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarCIRCE">
+    <s0:part element="s1:FirmarCIRCE" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarCIRCEResponse">
+    <s0:part element="s1:FirmarCIRCEResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarXML">
+    <s0:part element="s1:FirmarXML" name="parameters"/>
+  </s0:message>
+  <s0:message name="FirmarXMLResponse">
+    <s0:part element="s1:FirmarXMLResponse" name="parameters"/>
+  </s0:message>
+  <s0:portType name="FirmaDigital">
+    <s0:operation name="Firmar">
+      <s0:input message="s1:Firmar"/>
+      <s0:output message="s1:FirmarResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+    <s0:operation name="Validar">
+      <s0:input message="s1:Validar"/>
+      <s0:output message="s1:ValidarResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+    <s0:operation name="InsertarCertificado">
+      <s0:input message="s1:InsertarCertificado"/>
+      <s0:output message="s1:InsertarCertificadoResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+    <s0:operation name="FirmarSOAP">
+      <s0:input message="s1:FirmarSOAP"/>
+      <s0:output message="s1:FirmarSOAPResponse"/>
+    </s0:operation>
+    <s0:operation name="FirmarAncert">
+      <s0:input message="s1:FirmarAncert"/>
+      <s0:output message="s1:FirmarAncertResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+    <s0:operation name="FirmarCIRCE">
+      <s0:input message="s1:FirmarCIRCE"/>
+      <s0:output message="s1:FirmarCIRCEResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+    <s0:operation name="FirmarXML">
+      <s0:input message="s1:FirmarXML"/>
+      <s0:output message="s1:FirmarXMLResponse"/>
+      <s0:fault message="s1:Exception" name="Exception"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="servicesPortBinding" type="s1:FirmaDigital">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s0:operation name="Firmar">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+    <s0:operation name="Validar">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+    <s0:operation name="InsertarCertificado">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+    <s0:operation name="FirmarSOAP">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="FirmarAncert">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+    <s0:operation name="FirmarCIRCE">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+    <s0:operation name="FirmarXML">
+      <s2:operation/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+      <s0:fault name="Exception">
+        <s2:fault name="Exception" use="literal"/>
+      </s0:fault>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="wsFirmaDigital">
+    <s0:port binding="s1:servicesPortBinding" name="servicesPort">
+      <s2:address location="http://bus:7001/WSInternos/ProxyServices/PXFirmaDigital"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

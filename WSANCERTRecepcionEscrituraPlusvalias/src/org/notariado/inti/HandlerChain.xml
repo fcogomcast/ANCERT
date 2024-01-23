@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+  <handler-chain>
+    <handler>
+      <handler-name>org.notariado.inti.soap.Seguridad</handler-name>
+      <handler-class>org.notariado.inti.soap.Seguridad</handler-class>
+    </handler> 
+    <handler>
+      <handler-name>org.notariado.inti.soap.FirmaSalida</handler-name>
+      <handler-class>org.notariado.inti.soap.FirmaSalida</handler-class>
+    </handler>
+    <handler>
+      <handler-name>org.notariado.inti.soap.SoapServerHandler</handler-name>
+      <handler-class>org.notariado.inti.soap.SoapServerHandler</handler-class>
+    </handler>
+    <handler>
+      <handler-name>org.notariado.inti.soap.CargaContexto</handler-name>
+      <handler-class>org.notariado.inti.soap.CargaContexto</handler-class>
+    </handler>
+  </handler-chain>
+</handler-chains>

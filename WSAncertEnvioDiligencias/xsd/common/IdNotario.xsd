@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/TPAJD/diligencia" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dil="http://inti.notariado.org/XML/TPAJD/diligencia" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ID_NOTARIO">
+		<xs:annotation>
+			<xs:documentation>Datos identificativos de notario</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="APELLIDOS">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="65"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NOMBRE">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="65"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="NIF_NOTARIO">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="9"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="CODIGO_NOTARIO">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="7"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

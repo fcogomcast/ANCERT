@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML/FICHA" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="SUBSANACION">
+		<xs:annotation>
+			<xs:documentation>Subsanacion de una Ficha remitida con anterioridad</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TIPO">
+					<xs:annotation>
+						<xs:documentation>Indica si es Anulacion de Ficha o Modificacion</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="ANULACION"/>
+							<xs:enumeration value="MODIFICACION"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MOTIVO" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Motivo de subsanacion</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="300"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ID_TRAMITE_SUBSANACION" type="xs:long" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

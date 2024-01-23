@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:annotation>
+		<xs:documentation>Esquema para las respuestas del  Índice Fiscal</xs:documentation>
+	</xs:annotation>
+	<xs:element name="IND_FISCAL_REPLY">
+		<xs:annotation>
+			<xs:documentation>Elemento raíz</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CABECERA" type="CABECERAType"/>
+				<xs:element name="RESULTADO">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="TIPO_ERROR" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>Boleano (true/false o 1/0) que indica si se ha producido error o no. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="CODIGO_ERROR" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Código de error según tabla de errores posibles.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TEXTO_ERROR" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Texto explicativo del error que se ha producido</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CABECERAType">
+		<xs:annotation>
+			<xs:documentation>Bloque único que identifica el mensaje</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TIMESTAMP" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Timestamping sobre el envio del mensaje (AAAA-MM-DDThh:mm.ss)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_MSJ" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Número identificativo del mensaje</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID_APL" type="xs:string" fixed="PLTINDFIS">
+				<xs:annotation>
+					<xs:documentation>Identifica la aplicación ("PLTINDFIS" Código para la aplicación de gestión de los índices físcales)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FUNCION" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Número de función dentro de la aplicación (pendiente de definir)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_MSJ">
+				<xs:annotation>
+					<xs:documentation>Tipo de mensaje ( "1" Request, "2" Reply)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EMISOR" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Entidad emisora del mensaje (Código de PLATINO)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_RECEP">
+				<xs:annotation>
+					<xs:documentation>Tipo de entidad receptora del mensaje ( "3" CCAA)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RECEP">
+				<xs:annotation>
+					<xs:documentation>Entidad receptora del mensaje (Código de la CCAA)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
+						<xs:enumeration value="08"/>
+						<xs:enumeration value="09"/>
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="13"/>
+						<xs:enumeration value="14"/>
+						<xs:enumeration value="15"/>
+						<xs:enumeration value="17"/>
+						<xs:enumeration value="18"/>
+						<xs:enumeration value="19"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="21"/>
+						<xs:enumeration value="22"/>
+						<xs:enumeration value="23"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

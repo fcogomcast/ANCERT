@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="ID_ESCRITURAType">
+		<xs:annotation>
+			<xs:documentation>Datos identificativos de la escritura</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="COD_NOTARIO" type="CODIGO_NOTARIOType">
+				<xs:annotation>
+					<xs:documentation>Identificacion del Notario titular del documento en el momento de la autorización</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_NOTARIA" type="CODIGO_NOTARIAType">
+				<xs:annotation>
+					<xs:documentation>Identificacion de la Notaria donde se autorizó el documento</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_PROTOCOLO" type="NUMERO_DOCUMENTOType">
+				<xs:annotation>
+					<xs:documentation>Numero del documento solicitado</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_BIS" type="NUMERO_DOCUMENTO_BISType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Numero de documento Bis en el caso de que aplique</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="FECHA_AUTORIZACION" type="FECHA_INTERVENCIONType">
+					<xs:annotation>
+						<xs:documentation>Fecha de autorizacion del documento. Si se desconoce la fecha exacta, se puede indicar unicamente el año. En el envío de la escritura, se enviará siempre la fecha completa de autorización.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ANYO_AUTORIZACION" type="xs:int">
+					<xs:annotation>
+						<xs:documentation>Se informará solo en las solicitudes de copia cuando se desconozca la fecha exacta del documento.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="TIPO_DOCUMENTO" type="TIPO_DOCUMENTOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Libro al que pertenece el documento.
+1 - Protocolo ordinario
+2 - Protocolo especial de protestos
+3 - Libro registro de pólizas - Sección A
+4 - Libro registro de pólizas - Sección B
+5 - Protocolo reservado
+12 - Libro registro de pólizas indubitadas</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="NUMERO_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Numero de documento/protocolo/asiento del Libro Registro</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTO_BISType">
+		<xs:annotation>
+			<xs:documentation>Numero de documento/protocolo bis</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FECHA_INTERVENCIONType">
+		<xs:annotation>
+			<xs:documentation>Fecha de intervencion o autorizacion (AAAA-MM-DD)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_NOTARIOType">
+		<xs:annotation>
+			<xs:documentation>Codigo de ultimas voluntades del Notario</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{7}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_NOTARIAType">
+		<xs:annotation>
+			<xs:documentation>Codigo de catastro de la Notaria</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ACTO_JURIDICOType">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_DOCUMENTOType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

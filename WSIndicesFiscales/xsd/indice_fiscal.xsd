@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:annotation>
+		<xs:documentation>Esquema para el Índice Fiscal</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="notario.xsd"/>
+	<xs:include schemaLocation="notaria.xsd"/>
+	<xs:include schemaLocation="id_indice.xsd"/>
+	<xs:include schemaLocation="id_documento.xsd"/>
+	<xs:include schemaLocation="sujeto.xsd"/>
+	<xs:include schemaLocation="objeto.xsd"/>
+	<xs:include schemaLocation="operacion.xsd"/>
+	<xs:include schemaLocation="comun.xsd"/>
+	<xs:include schemaLocation="direccion.xsd"/>
+	<xs:element name="IND_FISCAL">
+		<xs:annotation>
+			<xs:documentation>Elemento raíz</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CABECERA" type="CABECERAType"/>
+				<xs:element name="DATOS" type="DATOSType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CABECERAType">
+		<xs:annotation>
+			<xs:documentation>Bloque único que identifica el mensaje</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TIMESTAMP" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Timestamping sobre el envio del mensaje (AAAA-MM-DDThh:mm.ss)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_MSJ" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Número identificativo del mensaje</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID_APL" type="xs:string" fixed="PLTINDFIS">
+				<xs:annotation>
+					<xs:documentation>Identifica la aplicación ("PLTINDFIS" Código para la aplicación de gestión de los índices físcales)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FUNCION" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Número de función dentro de la aplicación (pendiente de definir)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_MSJ">
+				<xs:annotation>
+					<xs:documentation>Tipo de mensaje ( "1" Request, "2" Reply)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EMISOR" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Entidad emisora del mensaje (Código de PLATINO)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_RECEP">
+				<xs:annotation>
+					<xs:documentation>Tipo de entidad receptora del mensaje ( "3" CCAA)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RECEP">
+				<xs:annotation>
+					<xs:documentation>Entidad receptora del mensaje (Código de la CCAA)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+						<xs:enumeration value="03"/>
+						<xs:enumeration value="04"/>
+						<xs:enumeration value="05"/>
+						<xs:enumeration value="06"/>
+						<xs:enumeration value="07"/>
+						<xs:enumeration value="08"/>
+						<xs:enumeration value="09"/>
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="13"/>
+						<xs:enumeration value="14"/>
+						<xs:enumeration value="15"/>
+						<xs:enumeration value="17"/>
+						<xs:enumeration value="18"/>
+						<xs:enumeration value="19"/>
+						<xs:enumeration value="20"/>
+						<xs:enumeration value="21"/>
+						<xs:enumeration value="22"/>
+						<xs:enumeration value="23"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DATOSType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple que recoge el detalle de índices asociado a un Notario e indica el número de repeticiones del bloque INDICE</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IND" type="INDICEType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="NUM_IND" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="INDICEType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple con datos relativos a cada uno de los índices incluidos en el envío</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NOTARIO" type="NOTARIOType"/>
+			<xs:element name="NOTARIA" type="NOTARIAType"/>
+			<xs:element name="ID_IND" type="ID_INDICEType"/>
+			<xs:element ref="DOC" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="NUM_DOC" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ID_INDICEType">
+		<xs:annotation>
+			<xs:documentation>Bloque único para cada bloque índice del mensaje. Identifica la relación de índices que se esta enviando</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PERIOD" type="PERIODICIDADType"/>
+			<xs:element name="NUM_DOCS" type="NUMERO_DOCUMENTOSType">
+				<xs:annotation>
+					<xs:documentation>Número total de documentos del bloque índice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple que recoge toda la información relativa a cada uno de los documentos incluidos en cada bloque INDICE del envío</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID_DOC" type="ID_DOCUMENTOType"/>
+			<xs:element name="SUJ" type="SUJETOType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OBJ" type="OBJETOType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="OPE" type="OPERACIONType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="NUM_OBJ" type="xs:short" use="required"/>
+		<xs:attribute name="NUM_OPE" type="xs:short" use="required"/>
+		<xs:attribute name="NUM_SUJ" type="xs:short" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ID_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Bloque único para cada bloque documento. Identifica el documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NUM_DOC" type="NUMERO_DOCUMENTO_COMPLETOType">
+				<xs:annotation>
+					<xs:documentation>Número de documento/protocolo/asiento del Libro Registro</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FECHA_INT" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha de intervención/autorización (AAAA-MM-DD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIP_DOC" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo del documento. Protocolo Ordinario (tipo 1) o Poliza (tipos 3,4 o 12)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:short">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="12"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SUJETOType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple con datos relativos a cada uno de los sujetos incluidos en el documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IDENT" type="IDENTIFICACIONType" minOccurs="0"/>
+			<xs:element name="PERSONA" type="PERSONA_IND_FISCALType"/>
+			<xs:element name="TIPO_INT" type="TIPO_INTERVENCION_TRIBUTABLEType">
+				<xs:annotation>
+					<xs:documentation>Tipo de intervención tributable. Según tabla</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OBJETOType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple con datos relativos a cada uno de los objetos incluidos en el documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="REF_CAT" type="REFERENCIA_CATASTRALType">
+					<xs:annotation>
+						<xs:documentation>Referencia Catastral</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="COD_PROV" type="CODIGO_PROVINCIAType">
+					<xs:annotation>
+						<xs:documentation>Código INE de la provincia</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="VER_CAT" type="VERACIDAD_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Grado de veracidad de la referencia catastral. Cumplimiento artículo 50 ley 13/1996 ("1" RC de la finca incorporada, "2" RC de la finca incorporada y dudosa, "3" RC incorporada de la finca de origen (art. 51.5), "5" No se ha presentado RC)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OPERACIONType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple con datos relativos a cada una de las operaciones incluidas en el documento</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CLAVE" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Clave de la Operación Legalmente Notificable. Según tabla de actos jurídicos en escrituras y actas notariales</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CUANTIA" type="IMPORTE_ECONOMICOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Cuantía de la Operación</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IMP" type="IMPType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IMPType">
+		<xs:annotation>
+			<xs:documentation>Bloque múltiple con los datos relativos a los impuestos de la operación y las comunidades competentes para dichos impuestos</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IMPUESTO" type="IMPUESTO_APLICABLEType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Impuesto aplicable.(" 1" ITP/AJD,  "2" ISD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CCAA" type="COMUNIDAD_AUTONOMAType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Comunidad Autónoma competente para la liquidación de los Impuestos ("01" Andalucía, "02" Aragón, "03" Asturias (Principado de), "04" Baleares (Islas), "05" Canarias, "06" Cantabria, "07" Castilla-La Mancha, "08" Castilla y León, "09" Cataluña, "10" Comunidad Valenciana, "11" Extremadura, "12" Galicia, "13" Madrid (Comunidad de), "14" Murcia (Región de), "15" Navarra (Comunidad Foral de), "17" Rioja (La), "18" Ceuta y Melilla, "19" Alava (Diputación Foral de), "20" Guipúzcoa (Diputación Foral de), "21" Vizcaya (Diputación Foral de), "22" Ceuta, "23" Melilla)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DOC" type="DOCUMENTOType"/>
+</xs:schema>

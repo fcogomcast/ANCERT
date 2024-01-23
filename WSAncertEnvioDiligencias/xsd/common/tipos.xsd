@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/TPAJD/diligencia" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dil="http://inti.notariado.org/XML/TPAJD/diligencia" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos comunes en distintos esquemas</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="IMPORTE_ECONOMICOType">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_INTERVENCION_TRIBUTABLEType">
+		<xs:annotation>
+			<xs:documentation>Tipo de intervencion del sujeto ("1" Adquirente/declarante, "2" Transmitente/causante, "3" Prestamista/acreditante, "4" Prestatario/acreditado, "5" Fiador/avalista/hipotecante o pignorante por deuda ajena, "6" Entidad creada, modificada o extinguida, "7" Entidad cuyas acciones o participaciones sociales se transmiten)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FINALIDAD_PRESTAMOType">
+		<xs:annotation>
+			<xs:documentation>Codigo de la finalidad del prestamo o credito ("1" Adquisicion de vivienda, "2" Adquisicion de otro inmueble, "3" Construccion de vivienda, "4" Construccion de otra edificacion, "5" Financiacion de promocion empresarial inmobiliaria, "6" Financiacion de otras actividades empresariales, "7" Refinanciacion de deudas, "98" No consta, "99" Otras)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="98"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_DOCUMENTO_IDENTIDADType">
+		<xs:annotation>
+			<xs:documentation>Tipo de documento de identidad ("1" NIF/CIF, "2" NIE, "3" Pasaporte, "5" Otros)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTO_IDENTIDADType">
+		<xs:annotation>
+			<xs:documentation>Numero de documento de identidad</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NOMBREType">
+		<xs:annotation>
+			<xs:documentation>Nombre de la persona física</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="APELLIDOS_RAZON_SOCIALType">
+		<xs:annotation>
+			<xs:documentation>Apellidos de la persona física o razón social de la persona jurídica</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FECHA_NACIMIENTOType">
+		<xs:annotation>
+			<xs:documentation>Fecha de nacimiento del sujeto (AAAA-MM-DD)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_SICAType">
+		<xs:annotation>
+			<xs:documentation>Codigo SICA de la entidad financiera</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FECHA_GENERACIONType">
+		<xs:annotation>
+			<xs:documentation>Fecha de generación del mensaje (AAAA-MM-DD)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="HORA_GENERACIONType">
+		<xs:annotation>
+			<xs:documentation>Hora de generación del mensaje en formato HH:MM:SS</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="\d{2}:\d{2}:\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ID_COMUNICACIONType">
+		<xs:annotation>
+			<xs:documentation>Número identificativo del mensaje</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="APLICACIONType">
+		<xs:annotation>
+			<xs:documentation>Código que identifica la aplicación</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OPERACIONType">
+		<xs:annotation>
+			<xs:documentation>Código que identifica la operación</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EMISORType">
+		<xs:annotation>
+			<xs:documentation>Código que identifica la entidad emisora del mensaje</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RECEPTORType">
+		<xs:annotation>
+			<xs:documentation>Código que identifica la entidad receptora del mensaje</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_VIA_CATASTROType">
+		<xs:annotation>
+			<xs:documentation>Tipo de vía (sigla), según tabla del Catastro</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AG"/>
+			<xs:enumeration value="AL"/>
+			<xs:enumeration value="AR"/>
+			<xs:enumeration value="AU"/>
+			<xs:enumeration value="AV"/>
+			<xs:enumeration value="AY"/>
+			<xs:enumeration value="BJ"/>
+			<xs:enumeration value="BO"/>
+			<xs:enumeration value="BR"/>
+			<xs:enumeration value="CA"/>
+			<xs:enumeration value="CG"/>
+			<xs:enumeration value="CH"/>
+			<xs:enumeration value="CI"/>
+			<xs:enumeration value="CJ"/>
+			<xs:enumeration value="CL"/>
+			<xs:enumeration value="CM"/>
+			<xs:enumeration value="CN"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="CP"/>
+			<xs:enumeration value="CR"/>
+			<xs:enumeration value="CS"/>
+			<xs:enumeration value="CT"/>
+			<xs:enumeration value="CU"/>
+			<xs:enumeration value="DE"/>
+			<xs:enumeration value="DP"/>
+			<xs:enumeration value="DS"/>
+			<xs:enumeration value="ED"/>
+			<xs:enumeration value="EM"/>
+			<xs:enumeration value="EN"/>
+			<xs:enumeration value="ER"/>
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="EX"/>
+			<xs:enumeration value="FC"/>
+			<xs:enumeration value="FN"/>
+			<xs:enumeration value="GL"/>
+			<xs:enumeration value="GR"/>
+			<xs:enumeration value="GV"/>
+			<xs:enumeration value="HT"/>
+			<xs:enumeration value="JR"/>
+			<xs:enumeration value="LD"/>
+			<xs:enumeration value="LG"/>
+			<xs:enumeration value="MC"/>
+			<xs:enumeration value="ML"/>
+			<xs:enumeration value="MN"/>
+			<xs:enumeration value="MS"/>
+			<xs:enumeration value="MT"/>
+			<xs:enumeration value="MZ"/>
+			<xs:enumeration value="PQ"/>
+			<xs:enumeration value="PB"/>
+			<xs:enumeration value="PD"/>
+			<xs:enumeration value="PJ"/>
+			<xs:enumeration value="PL"/>
+			<xs:enumeration value="PM"/>
+			<xs:enumeration value="PR"/>
+			<xs:enumeration value="PS"/>
+			<xs:enumeration value="PT"/>
+			<xs:enumeration value="PZ"/>
+			<xs:enumeration value="QT"/>
+			<xs:enumeration value="RB"/>
+			<xs:enumeration value="RC"/>
+			<xs:enumeration value="RD"/>
+			<xs:enumeration value="RM"/>
+			<xs:enumeration value="RP"/>
+			<xs:enumeration value="RR"/>
+			<xs:enumeration value="RU"/>
+			<xs:enumeration value="SA"/>
+			<xs:enumeration value="SD"/>
+			<xs:enumeration value="SL"/>
+			<xs:enumeration value="SN"/>
+			<xs:enumeration value="SU"/>
+			<xs:enumeration value="TN"/>
+			<xs:enumeration value="TO"/>
+			<xs:enumeration value="TR"/>
+			<xs:enumeration value="UR"/>
+			<xs:enumeration value="VR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NOMBRE_VIAType">
+		<xs:annotation>
+			<xs:documentation>Nombre de la calle o vía</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_VIAType">
+		<xs:annotation>
+			<xs:documentation>Numero de la calle o vía</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DUPLICADOType">
+		<xs:annotation>
+			<xs:documentation>Indica si el número de la vía está duplicado</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BLOQUEType">
+		<xs:annotation>
+			<xs:documentation>Número de bloque</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ESCALERAType">
+		<xs:annotation>
+			<xs:documentation>Número o letra de escalera</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PLANTAType">
+		<xs:annotation>
+			<xs:documentation>Planta</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PUERTAType">
+		<xs:annotation>
+			<xs:documentation>Puerta</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RESTOType">
+		<xs:annotation>
+			<xs:documentation>Resto dirección no estructurada</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PEDANIAType">
+		<xs:annotation>
+			<xs:documentation>Nombre de la pedanía</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_INE_MUNICIPIOType">
+		<xs:annotation>
+			<xs:documentation>Código INE del municipio</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_INE_PROVINCIAType">
+		<xs:annotation>
+			<xs:documentation>Código INE de la provincia</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_POSTALType">
+		<xs:annotation>
+			<xs:documentation>Código postal</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{5}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REFERENCIA_CATASTRALType">
+		<xs:annotation>
+			<xs:documentation>Referencia catastral del inmueble</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VERACIDAD_CATASTRALType">
+		<xs:annotation>
+			<xs:documentation>Grado de veracidad de la referencia catastral. Cumplimiento artículo 50 ley 13/1996 ("1" RC de la finca incorporada, "2" RC de la finca incorporada y dudosa, "3" RC incorporada de la finca de origen (art. 51.5), "5" No se ha presentado RC</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CLASE_INMUEBLEType">
+		<xs:annotation>
+			<xs:documentation>Código de la clase de inmueble urbano ("1" Vivienda-piso libre, "2" Vivienda-unifamiliar libre, "3" Vivienda-piso de protección oficial, "4" Vivienda-unifamiliar de protección oficial, "5" Aparcamiento, "6" Trastero, "7" Local de negocio en edificio de viviendas, "8" Local de negocio en edificio exclusivo, "9" Oficina en edificio de viviendas, "10" Oficina en edificio de oficinas, "11" Nave industrial, "12" Terreno, "99" Otras edificaciones)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SUPERFICIEType">
+		<xs:annotation>
+			<xs:documentation>Superficie del inmueble urbano en metros cuadrados</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minExclusive value="0"/>
+			<xs:totalDigits value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="APACARCAMIENTO_ANEJOType">
+		<xs:annotation>
+			<xs:documentation>Indica si el immueble tiene un aparcamiento anejo</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="TRASTERO_ANEJOType">
+		<xs:annotation>
+			<xs:documentation>Indica si el immueble tiene un trastero anejo</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="VIVIENDA_HABITUALType">
+		<xs:annotation>
+			<xs:documentation>Indica si el immueble es vivienda habitual</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

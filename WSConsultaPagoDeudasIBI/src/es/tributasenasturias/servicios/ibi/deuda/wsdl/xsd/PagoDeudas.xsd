@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/CD" xmlns="http://inti.notariado.org/XML/CD" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Peticion de pago efectuada por SSCC a un Organismo Tributario-->
+	<xs:include schemaLocation="Tipos.xsd"/>
+	<xs:include schemaLocation="Common-deudas.xsd"/>
+	<xs:element name="PAGO_DEUDAS">
+		<xs:annotation>
+			<xs:documentation>Mensajeria para el pago de deudas de IBI.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="REQUEST">
+						<xs:annotation>
+							<xs:documentation>Petición de pago de deudas realizada por el notario</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA" type="CABECERAType">
+									<xs:annotation>
+										<xs:documentation>Cabecera del mensaje</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ID_NOTARIO" type="ID_NOTARIOType">
+									<xs:annotation>
+										<xs:documentation>Identificación del notario</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:choice>
+									<xs:element name="ORDEN_PAGO" type="ORDEN_PAGOType">
+										<xs:annotation>
+											<xs:documentation>Orden de pago de la deuda firmada por el notario.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="PAGO_RED_ES">
+										<xs:annotation>
+											<xs:documentation>Datos del pago enviado a Red.es (solo aplica si el pago lo gestiona ANCERT y no el propio ayuntamiento)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="REFERENCIA_CATASTRAL" type="REFERENCIA_CATASTRALType">
+													<xs:annotation>
+														<xs:documentation>Referencia catastral de la que queremos pagar las deudas</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="CODIGO_MUNICIPIO">
+													<xs:annotation>
+														<xs:documentation>Código INE del municipio sobre el cual realizamos el pago</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:whiteSpace value="collapse"/>
+															<xs:length value="6"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="IDIOMA" type="IDIOMAType">
+													<xs:annotation>
+														<xs:documentation>Idioma con el cual queremos obtener el PDF. ES=Castellano,
+CA=Catalan,
+EU=Euskera,
+GL=Gallego.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="REFERENCIA" type="REFERENCIAType">
+													<xs:annotation>
+														<xs:documentation>Identificador de 12 dígitos que identifica la operación.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="NRC">
+													<xs:annotation>
+														<xs:documentation>Número de Referencia Completo. Código devuelto por la Entidad Financiera
+Colaboradora cuando la operación se ha completado
+con éxito.</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:length value="22"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="IMPORTE_TOTAL">
+													<xs:annotation>
+														<xs:documentation>Importe pagado. Se especifica en céntimos de euro (por ejemplo, 125 € se indicaría como 000000012500).</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:length value="12"/>
+															<xs:pattern value="\d{12}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="PAGO_CAM">
+										<xs:annotation>
+											<xs:documentation>Datos del pago enviado a CAM de las de deudas de IBI de la Región de Murcia (solo aplica si el pago lo gestiona ANCERT y no el propio ayuntamiento)</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="REFERENCIA_CATASTRAL" type="REFERENCIA_CATASTRALType">
+													<xs:annotation>
+														<xs:documentation>Referencia catastral de la que queremos pagar las deudas</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="CODIGO_MUNICIPIO">
+													<xs:annotation>
+														<xs:documentation>Código INE del municipio sobre el cual realizamos el pago</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:whiteSpace value="collapse"/>
+															<xs:length value="6"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="IDIOMA" type="IDIOMAType">
+													<xs:annotation>
+														<xs:documentation>Idioma con el cual queremos obtener el PDF. ES=Castellano,
+CA=Catalan,
+EU=Euskera,
+GL=Gallego.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="N28">
+													<xs:annotation>
+														<xs:documentation>Numero de justificante para la generación del CCT</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:pattern value="\d{28}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="IMPORTE" type="xs:long">
+													<xs:annotation>
+														<xs:documentation>Importe del pago en centimos de Euro.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="JUSTIFICANTE">
+													<xs:annotation>
+														<xs:documentation>Justificante de pago</xs:documentation>
+													</xs:annotation>
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="FECHA_INGRESO">
+																<xs:annotation>
+																	<xs:documentation>Fecha del ingreso en formato  dd/MM/yyyy</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="10"/>
+																		<xs:pattern value="\d{2}/\d{2}/\d{4}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="HORA_INGRESO">
+																<xs:annotation>
+																	<xs:documentation>Hora del ingreso en formato HH:mm:ss</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:length value="8"/>
+																		<xs:pattern value="\d{2}:\d{2}:\d{2}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+															<xs:element name="CCT">
+																<xs:annotation>
+																	<xs:documentation>Justificante de pago</xs:documentation>
+																</xs:annotation>
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:minLength value="16"/>
+																		<xs:maxLength value="69"/>
+																		<xs:pattern value="[0-9a-zA-Z]{16,69}"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:element>
+														</xs:sequence>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:choice>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="REPLY">
+						<xs:annotation>
+							<xs:documentation>Respuesta del ayuntamiento al pago de deudas</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA" type="CABECERAType">
+									<xs:annotation>
+										<xs:documentation>Cabecera del mensaje</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="DATOS" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Si el mensaje es de error, se omite este bloque </xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="JUSTIFICANTE_PAGO">
+												<xs:annotation>
+													<xs:documentation>Justificante del pago de las deudas</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="NUM_JUSTIFICANTE_PAGO" type="NumJustificantePagoType">
+															<xs:annotation>
+																<xs:documentation>Numero justificante del pago</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="DOCUMENTO" type="xs:base64Binary">
+															<xs:annotation>
+																<xs:documentation>Documento pdf codificado en  base64 que justifica el pago</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="DOCUMENTO_JUST_SIN_DEUDAS" type="xs:base64Binary">
+												<xs:annotation>
+													<xs:documentation>Documento pdf codificado en base64 que acredita que la referencia catastral está sin deudas. </xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="IMPORTE_PAGADO" type="CANTIDAD"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="RESULTADO" type="RESULTADOType">
+									<xs:annotation>
+										<xs:documentation>Resultado de la petición (OK o ERROR)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:any namespace="##any" processContents="lax" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Firma del nodo REQUEST o REPLY siguiendo el estándar XADES (IMPORTANTE: solo se requiere esta firma en las integraciones via POST).</xs:documentation>
+					</xs:annotation>
+				</xs:any>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

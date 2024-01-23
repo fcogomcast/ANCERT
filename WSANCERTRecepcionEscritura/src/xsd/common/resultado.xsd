@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML/FICHA" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="RESULTADO">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TIPO_ERROR" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Boleano (true/false o 1/0) que indica si se ha producido algún error</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CODIGO_ERROR" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Codigo del error conocido y tipificado en tabla de errores. 
+Solo vendrá rellenado si el campo tipo_error=true/1</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TEXTO_ERROR" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Texto de error no tipificado en tabla de errores
+Solo vendrá rellenado si el campo tipo_error=true/1</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

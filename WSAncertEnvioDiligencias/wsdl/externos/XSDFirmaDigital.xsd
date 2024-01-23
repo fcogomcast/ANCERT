@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Oracle JAX-WS 2.1.3-07/10/2008 08:41 PM(bt). --><xs:schema version="1.0" targetNamespace="http://localhost:7001" xmlns:tns="http://localhost:7001" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="Exception" type="tns:Exception"/>
+
+<xs:element name="Firmar" type="tns:Firmar"/>
+
+<xs:element name="FirmarAncert" type="tns:FirmarAncert"/>
+
+<xs:element name="FirmarAncertResponse" type="tns:FirmarAncertResponse"/>
+
+<xs:element name="FirmarCIRCE" type="tns:FirmarCIRCE"/>
+
+<xs:element name="FirmarCIRCEResponse" type="tns:FirmarCIRCEResponse"/>
+
+<xs:element name="FirmarResponse" type="tns:FirmarResponse"/>
+
+<xs:element name="FirmarSOAP" type="tns:FirmarSOAP"/>
+
+<xs:element name="FirmarSOAPResponse" type="tns:FirmarSOAPResponse"/>
+
+<xs:element name="FirmarXML" type="tns:FirmarXML"/>
+
+<xs:element name="FirmarXMLResponse" type="tns:FirmarXMLResponse"/>
+
+<xs:element name="InsertarCertificado" type="tns:InsertarCertificado"/>
+
+<xs:element name="InsertarCertificadoResponse" type="tns:InsertarCertificadoResponse"/>
+
+<xs:element name="Validar" type="tns:Validar"/>
+
+<xs:element name="ValidarResponse" type="tns:ValidarResponse"/>
+
+<xs:complexType name="Firmar">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+<xs:element name="identificadorCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="passwordCertificado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarResponse">
+<xs:sequence>
+<xs:element name="xmlFirmado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarAncert">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+<xs:element name="identificadorCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="passwordCertificado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarAncertResponse">
+<xs:sequence>
+<xs:element name="xmlFirmado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertarCertificado">
+<xs:sequence>
+<xs:element name="rutaCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="rutaClavePrivada" type="xs:string" minOccurs="0"/>
+<xs:element name="aliasCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="passwordCertificado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InsertarCertificadoResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="Validar">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ValidarResponse">
+<xs:sequence>
+<xs:element name="esValido" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarXML">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+<xs:element name="aliasCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="idNodoAFirmar" type="xs:string" minOccurs="0"/>
+<xs:element name="nodoPadre" type="xs:string" minOccurs="0"/>
+<xs:element name="nsNodoPadre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarXMLResponse">
+<xs:sequence>
+<xs:element name="xmlFirmado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarSOAP">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+<xs:element name="aliasCertificado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarSOAPResponse">
+<xs:sequence>
+<xs:element name="xmlFirmado" type="xs:string" minOccurs="0"/>
+<xs:element name="resultado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarCIRCE">
+<xs:sequence>
+<xs:element name="xmlData" type="xs:string" minOccurs="0"/>
+<xs:element name="identificadorCertificado" type="xs:string" minOccurs="0"/>
+<xs:element name="passwordCertificado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="FirmarCIRCEResponse">
+<xs:sequence>
+<xs:element name="contenidoFirmado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

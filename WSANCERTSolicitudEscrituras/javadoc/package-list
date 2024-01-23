@@ -1,0 +1,16 @@
+es.tributasenasturias.services.ancert.solicitudEscritura
+es.tributasenasturias.services.ancert.solicitudEscritura.Exceptions
+es.tributasenasturias.services.ancert.solicitudEscritura.bd
+es.tributasenasturias.services.ancert.solicitudEscritura.comunicaciones.entrada
+es.tributasenasturias.services.ancert.solicitudEscritura.comunicaciones.externas
+es.tributasenasturias.services.ancert.solicitudEscritura.context
+es.tributasenasturias.services.ancert.solicitudEscritura.factory
+es.tributasenasturias.services.ancert.solicitudEscritura.handler
+es.tributasenasturias.services.ancert.solicitudEscritura.objetos
+es.tributasenasturias.services.ancert.solicitudEscritura.seguridad
+es.tributasenasturias.services.ancert.solicitudEscritura.utils
+es.tributasenasturias.services.ancert.solicitudEscritura.utils.firma
+es.tributasenasturias.services.ancert.solicitudEscritura.utils.log
+es.tributasenasturias.services.ancert.solicitudEscritura.utils.preferencias
+es.tributasenasturias.services.ancert.solicitudEscritura.validacion
+es.tributasenasturias.services.ancert.solicitudEscritura.wssecurity

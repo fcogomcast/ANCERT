@@ -1,0 +1,11 @@
+es.tributasenasturias.servicios.ibi.deuda.soap
+org.notariado.inti
+org.notariado.inti.contexto
+org.notariado.inti.exceptions
+org.notariado.inti.mensajes
+org.notariado.inti.preferencias
+org.notariado.inti.soap
+org.notariado.inti.utils
+org.notariado.inti.utils.log
+org.notariado.inti.wssecurity
+org.notariado.inti.xml

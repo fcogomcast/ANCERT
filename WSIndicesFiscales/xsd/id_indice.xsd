@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos para los elementos usados en el tipo complejo ID_INDICE dentro de un índice</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="PERIODICIDADType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la periodicidad del índice</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ANU" type="ANUALIDADType">
+				<xs:annotation>
+					<xs:documentation>Año (AAAA)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="TRIM">
+					<xs:annotation>
+						<xs:documentation>Trimestre ("1T", "2T", "3T", "4T")</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="1T"/>
+							<xs:enumeration value="2T"/>
+							<xs:enumeration value="3T"/>
+							<xs:enumeration value="4T"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MES" type="MESType">
+					<xs:annotation>
+						<xs:documentation>Mes [1-12]</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ANUALIDADType">
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MESType">
+		<xs:restriction base="xs:byte">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTOSType">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

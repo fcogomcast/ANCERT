@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="Tipos.xsd"/>
+	<xs:complexType name="CABECERAType">
+		<xs:sequence>
+			<xs:element name="APLICACION" type="xs:string" fixed="NOCD">
+				<xs:annotation>
+					<xs:documentation>Campo fijo con valor NOCD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID_COMUNICACION" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>identifica una comunicacion. REQUEST y REPLY deben usar el mismo valor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FECHA" type="TFecha">
+				<xs:annotation>
+					<xs:documentation>Fecha de la comunicacion</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HORA" type="THora">
+				<xs:annotation>
+					<xs:documentation>Hora de la comunicación</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CODOPER">
+				<xs:annotation>
+					<xs:documentation>Código de la Operación que se desea Realizar. "01" CONSULTA DE DEUDAS</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="01"/>
+						<xs:enumeration value="02"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="EMISOR">
+				<xs:annotation>
+					<xs:documentation>Código representativo de la entidad emisora (CGN para el REQUEST y código INE para los ayuntamientos o codigo a pactar en el resto para el REPLY)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="1"/>
+						<xs:maxLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RECEPTOR" type="COD_ORGANISMOType">
+				<xs:annotation>
+					<xs:documentation>Código de la entidad Receptora (Código INE para los ayuntamientos o codigo a pactar en el resto para el REQUEST, y CGN para el REPLY)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO">
+				<xs:annotation>
+					<xs:documentation>1 para el REQUEST y 2 para el REPLY.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ID_NOTARIOType">
+		<xs:sequence>
+			<xs:element name="APELLIDOS">
+				<xs:annotation>
+					<xs:documentation>Contiene los apellidos del notario</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="65"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="NOMBRE">
+				<xs:annotation>
+					<xs:documentation>Contiene el nombre del notario</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="65"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CODIGO_NOTARIO">
+				<xs:annotation>
+					<xs:documentation>Contiene el código de notario</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:length value="7"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="CODIGO_NOTARIA">
+				<xs:annotation>
+					<xs:documentation>Contiene el código de la notaria</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:length value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PARAMETROS_CONSULTAType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="REFERENCIA_CATASTRAL" type="REFERENCIA_CATASTRALType">
+					<xs:annotation>
+						<xs:documentation>Referencia catastral de la que queremos obtener deudas</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="NUMERO_FIJO" type="NUMERO_FIJOType">
+					<xs:annotation>
+						<xs:documentation>Numero fijo (fincas urbanas) o referencia catastral (fincas rústicas) para inmuebles de Bizkaia</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="CODIGO_MUNICIPIO">
+				<xs:annotation>
+					<xs:documentation>Código INE del municipio sobre el cual realizamos la consulta</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:length value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IDIOMA">
+				<xs:annotation>
+					<xs:documentation>Idioma con el cual queremos obtener el PDF. ES=Castellano,
+CA=Catalan,
+EU=Euskera,
+GL=Gallego.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:enumeration value="ES"/>
+						<xs:enumeration value="CA"/>
+						<xs:enumeration value="GL"/>
+						<xs:enumeration value="EU"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LISTA_DEUDASType">
+		<xs:sequence>
+			<xs:element name="DEUDA" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:all>
+						<xs:element name="JUSTIFICANTE">
+							<xs:annotation>
+								<xs:documentation>Número de cargo o Justificante de deuda</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:whiteSpace value="collapse"/>
+									<xs:minLength value="1"/>
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="EJERCICIO">
+							<xs:annotation>
+								<xs:documentation>Ejercicio de la liquidación de la deuda</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="\d{4}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="DESCRIPCION">
+							<xs:annotation>
+								<xs:documentation>Descripción de la deuda</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="100"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="NOMINAL" type="CANTIDAD">
+							<xs:annotation>
+								<xs:documentation>Importe nominal de la Deuda</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="RECARGO" type="CANTIDAD">
+							<xs:annotation>
+								<xs:documentation>Importe del recargo o recargos al importe nominal de la Deuda.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="INTERESES" type="CANTIDAD">
+							<xs:annotation>
+								<xs:documentation>Importe de los intereses asociados a la Deuda</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IMPORTE_TOTAL" type="CANTIDAD">
+							<xs:annotation>
+								<xs:documentation>Importe total de la deuda con intereses</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DEUDA_IBI">
+							<xs:annotation>
+								<xs:documentation>FLAG que marcará si la deuda relacionada es una deuda del IBI (valor ‘S’ ) o no se trata de una deuda de IBI (valor ‘N’)</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="S"/>
+									<xs:enumeration value="N"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:all>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DEUDA_TOTAL" type="CANTIDAD">
+				<xs:annotation>
+					<xs:documentation>Importe total de las deudas (indicar 0 si no existen deudas)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RESULTADOType">
+		<xs:sequence>
+			<xs:element name="RETURNCODE">
+				<xs:annotation>
+					<xs:documentation>Flag que indica si la operación se ha efectuado Correctamente "0" o bien se ha producido algún tipo de error "1" y es necesario chequear el CODERROR</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="COD_ERROR" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código del error conocido y tipificado en tabla de errores. Campo opcional.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:maxLength value="10"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DESC_ERROR" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descripción del error</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="200"/>
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ORDEN_PAGOType">
+		<xs:sequence>
+			<xs:element name="PARAMETROS_PAGO">
+				<xs:annotation>
+					<xs:documentation>Parámetros de pago de la deuda</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="REFERENCIA_CATASTRAL" type="REFERENCIA_CATASTRALType">
+							<xs:annotation>
+								<xs:documentation>Referencia catastral de la que queremos pagar las deudas</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CODIGO_MUNICIPIO">
+							<xs:annotation>
+								<xs:documentation>Código INE del municipio sobre el cual realizamos el pago</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:whiteSpace value="collapse"/>
+									<xs:length value="6"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="IDIOMA" type="IDIOMAType">
+							<xs:annotation>
+								<xs:documentation>Idioma con el cual queremos obtener el PDF. ES=Castellano,
+CA=Catalan,
+EU=Euskera,
+GL=Gallego.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IMPORTE_DEUDA" type="CANTIDAD">
+							<xs:annotation>
+								<xs:documentation>Importe de la deuda</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DATOS_BANCARIOS">
+							<xs:annotation>
+								<xs:documentation>Datos de la cuenta corriente para realizar el cobro de la deuda</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ENTIDAD">
+										<xs:annotation>
+											<xs:documentation>Código de la entidad bancaria</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="CCCEntidadType"/>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="OFICINA" type="CCCOficinaType">
+										<xs:annotation>
+											<xs:documentation>Código de la oficina</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="DC" type="CCCDcType">
+										<xs:annotation>
+											<xs:documentation>Dígito de control</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="CUENTA" type="CCCCuentaType">
+										<xs:annotation>
+											<xs:documentation>Número de cuenta</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="NIF_TITULAR" type="NIFCIFNIEType">
+										<xs:annotation>
+											<xs:documentation>Nif del titular o autorizado de la cuenta corriente</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="NOMBRE_TITULAR">
+										<xs:annotation>
+											<xs:documentation>Nombre y apellidos del titular o autorizado de la cuenta corriente</xs:documentation>
+										</xs:annotation>
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="1"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="ID" type="xs:ID" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:any namespace="##any" processContents="lax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Firma del nodo PARAMETROS_PAGO realizada por el notario siguiendo el estándar XADES.</xs:documentation>
+				</xs:annotation>
+			</xs:any>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

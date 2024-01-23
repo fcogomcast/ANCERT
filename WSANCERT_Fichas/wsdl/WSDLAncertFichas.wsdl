@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.tributasenasturias.es/FichasNotariales/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WSDLAncertFichas" targetNamespace="http://services.tributasenasturias.es/FichasNotariales/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://services.tributasenasturias.es/FichasNotariales/">
+      <xsd:element name="AltaFicha">
+        <xsd:complexType>
+          <xsd:sequence>
+
+
+
+
+
+          	<xsd:element name="id_escritura"
+          		type="tns:id_escrituraType">
+          	</xsd:element>
+                        <xsd:element name="origen_ficha" type="xsd:string"
+          		minOccurs="1" maxOccurs="1">
+          		<xsd:annotation>
+          			<xsd:documentation>
+          				Origen de la ficha: N = Recepción por el
+          				servicio de escrituras notariales, NP =
+          				Recepción por el servicio de escrituras de
+          				plusvalías.
+          			</xsd:documentation>
+          		</xsd:annotation>
+          	</xsd:element>
+                        <xsd:element name="codigo_ayuntamiento" type="xsd:string"
+          		minOccurs="0" maxOccurs="1">
+          		<xsd:annotation>
+          			<xsd:documentation>
+          				Código INE del ayuntamiento con cuyo trámite
+          				de plusvalía está relacionada la ficha
+          				notarial, si hubiera.
+          			</xsd:documentation>
+          		</xsd:annotation>
+          	</xsd:element>
+
+
+                        <xsd:element name="autorizacion_envio_diligencias" type="xsd:string" minOccurs="0" maxOccurs="1">
+                        	<xsd:annotation>
+                        		<xsd:documentation>
+                        			Flag que indica el consentimiento
+                        			del sujeto pasivo para enviar la
+                        			diligencia de pago al notario.
+                        			Valores (S o N)
+                        		</xsd:documentation>
+                        	</xsd:annotation></xsd:element>
+
+                        <xsd:element name="contenido_archivo_comprimido" type="xsd:base64Binary" minOccurs="1" maxOccurs="1">
+          		<xsd:annotation>
+          			<xsd:documentation>
+          				Contenido binario codificado como base64 del
+          				archivo comprimido que contendrá el PDF y el
+          				XML de ficha
+          			</xsd:documentation>
+          		</xsd:annotation>
+          	</xsd:element>
+                    </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AltaFichaResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+
+          	<xsd:element name="id_escritura"
+          		type="tns:id_escrituraType">
+          	</xsd:element>
+          	<xsd:element name="es_error" type="xsd:boolean" />
+          	<xsd:element name="codigo" type="xsd:string"></xsd:element>
+          	<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="id_escrituraType">
+      	<xsd:annotation>
+      		<xsd:documentation>
+      			Datos identificativos del documento notarial
+      		</xsd:documentation>
+      	</xsd:annotation>
+      	<xsd:sequence>
+      		<xsd:element name="codigo_notario" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+      		<xsd:element name="codigo_notaria" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+      		<xsd:element name="numero_protocolo" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+      		<xsd:element name="protocolo_bis" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+      		<xsd:element name="fecha_autorizacion" type="xsd:string" minOccurs="1" maxOccurs="1">
+      			<xsd:annotation>
+      				<xsd:documentation>
+      					Fecha de autorización de la escritura, en
+      					formato DD-MM-YYYY
+      				</xsd:documentation>
+      			</xsd:annotation></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="AltaFichaRequest">
+    <wsdl:part element="tns:AltaFicha" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AltaFichaResponse">
+    <wsdl:part element="tns:AltaFichaResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="FichasNotariales">
+    <wsdl:operation name="AltaFicha">
+      <wsdl:input message="tns:AltaFichaRequest"/>
+      <wsdl:output message="tns:AltaFichaResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FichasNotarialesSOAP" type="tns:FichasNotariales">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="AltaFicha">
+      <soap:operation soapAction="http://services.tributasenasturias.es/FichasNotariales/AltaFicha"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FichasNotariales">
+    <wsdl:port binding="tns:FichasNotarialesSOAP" name="FichasNotarialesSOAP">
+      <soap:address location="http://bus:7101/WSANCERT/ProxyServices/PXFichasNotariales"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

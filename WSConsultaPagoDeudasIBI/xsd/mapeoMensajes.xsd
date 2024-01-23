@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio Developer Edition 8.1.7.2743 (http://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="mapeoMensajes">
+    <xs:complexType>
+      <xs:sequence>
+      	<xs:element minOccurs="0" maxOccurs="unbounded" name="seccion">
+      		<xs:complexType>
+      			<xs:sequence>
+			        <xs:element minOccurs="0" maxOccurs="unbounded" name="mensaje">
+			          <xs:complexType>
+			            <xs:sequence>
+			              <xs:element minOccurs="1" name="externo" type="xs:string">
+			              	<xs:annotation>
+			              		<xs:documentation>Código o identificador de mensaje que llega del sistema externo y se va a mapear a uno interno.</xs:documentation>
+			              	</xs:annotation>
+			              </xs:element>
+			              <xs:element minOccurs="1" name="aplicacion" type="xs:string">
+			              	<xs:annotation>
+			              		<xs:documentation>Identificador/Alias del mensaje en la tabla de mensajes internos (atributo "id") equivalente al código de mensaje externo.</xs:documentation>
+			              	</xs:annotation>
+			              </xs:element>
+			              <xs:element minOccurs="0" name="descripcion" type="xs:string">
+			              	<xs:annotation>
+			              		<xs:documentation>Descripción del error externo. A efectos informativos, no se utiliza.</xs:documentation>
+			              	</xs:annotation>
+			              </xs:element>
+			            </xs:sequence>
+			          <xs:attribute name="id" type="xs:string" use="optional"><xs:annotation><xs:documentation>Identificador de mensaje. A efectos puramente informativos, no se usa por el momento.</xs:documentation></xs:annotation></xs:attribute>  
+			          </xs:complexType>
+			        </xs:element>
+		       </xs:sequence>
+		     <xs:attribute name="id" type="xs:string" use="required"><xs:annotation><xs:documentation>Identificador de la sección, el programa buscará mensajes en esta sección</xs:documentation></xs:annotation></xs:attribute>
+		    </xs:complexType>
+	     </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

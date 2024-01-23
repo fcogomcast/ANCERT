@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://services.tributasenasturias.es/ancert/solicitudEscritura"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="wsdlSolicitudEscritura"
+	targetNamespace="http://services.tributasenasturias.es/ancert/solicitudEscritura">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://services.tributasenasturias.es/ancert/solicitudEscritura">
+			<xsd:element name="solicitud" type="tns:entradaType">
+			</xsd:element>
+			<xsd:element name="solicitudResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="solicitud"
+							type="tns:entradaType">
+						</xsd:element>
+
+
+						<xsd:element name="resultado"
+							type="tns:resultadoType">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="entradaType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Tipo de parámetros de entrada del servicio
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="codNotario" type="xsd:string"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Identificación del notario
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="codNotaria" type="xsd:string"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Identificación única de la notaría
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="protocolo" type="xsd:string"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Número de protocolo (incluyendo
+								protocolo Bis)
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="anioAutorizacion" type="xsd:int"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>
+								Año de autorización.
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="destinatario">
+						<xsd:annotation>
+							<xsd:documentation>
+								Departamento del organismo solicitante
+								destinatario de la copia electrónica
+								solicitada.
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"></xsd:minLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="finalidad">
+						<xsd:annotation>
+							<xsd:documentation>
+								Fundamento o finalidad de la solicitud.
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="100"></xsd:minLength>
+								<xsd:maxLength value="475"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+                    <xsd:element name="personaSolicitante" type="tns:personaSolicitanteType"></xsd:element>
+                    <xsd:element name="tipoProcedimiento">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="4"></xsd:minLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="numeroExpediente">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="3"></xsd:minLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="otorgantes"
+						type="tns:otorgantesType" minOccurs="1" maxOccurs="unbounded">
+					</xsd:element>
+					<xsd:element name="idOrigen" type="xsd:string"
+						maxOccurs="1" minOccurs="0">
+					</xsd:element>
+
+
+
+
+				</xsd:sequence>
+			</xsd:complexType>			<xsd:element name="solicitudFault">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="solicitudFault"
+							type="xsd:string">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="resultadoType">
+				<xsd:sequence>
+					<xsd:element name="codigo" type="xsd:string"></xsd:element>
+					<xsd:element name="mensaje" type="xsd:string"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		
+			<xsd:complexType name="otorgantesType">
+				<xsd:sequence>
+					<xsd:element name="otorgante" type="tns:otorganteType"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		
+			<xsd:complexType name="otorganteType">
+				<xsd:sequence>
+					<xsd:element name="dniOtorgante">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+
+								<xsd:length value="9"></xsd:length>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="nombreOtorgante">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"></xsd:minLength>
+								<xsd:maxLength value="60"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		
+			<xsd:complexType name="personaSolicitanteType">
+				<xsd:sequence>
+					<xsd:element name="dniResponsable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+
+								<xsd:length value="9"></xsd:length>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="nombreResponsable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"></xsd:minLength>
+								<xsd:maxLength value="40"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="cargoResponsable">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:minLength value="1"></xsd:minLength>
+								<xsd:maxLength value="35"></xsd:maxLength>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="solicitarRequest">
+		<wsdl:part element="tns:solicitud" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="solicitarResponse">
+		<wsdl:part element="tns:solicitudResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="SolicitudEscrituraException">
+		<wsdl:part name="fault" element="tns:solicitudFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="SolicitudEscritura">
+		<wsdl:operation name="solicitar">
+			<wsdl:documentation>
+				Operación de solicitud de escritura. Entrada: -Código de
+				notario. -Código de notaria. -Protocolo. -Año de
+				autorización
+			</wsdl:documentation>
+			<wsdl:input message="tns:solicitarRequest" />
+			<wsdl:output message="tns:solicitarResponse" />
+            <wsdl:fault name="fault" message="tns:SolicitudEscrituraException"></wsdl:fault>
+        </wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SolicitudEscrituraSOAP"
+		type="tns:SolicitudEscritura">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="solicitar">
+			<soap:operation
+				soapAction="http://services.tributasenasturias.es/ancert/solicitudEscritura/solicitar" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault"><soap:fault name="solicitudFault" use="literal"/></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SolicitudEscritura">
+		<wsdl:documentation>
+			Servicio de solicitud de escritura a ANCERT.
+		</wsdl:documentation>
+		<wsdl:port binding="tns:SolicitudEscrituraSOAP"
+			name="SolicitudEscrituraSOAP">
+			<soap:address
+				location="http://bus:7101/WSANCERT/ProxyServices/PXSolicitudEscritura" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos para los elementos usados en el tipo complejo ID_DOCUMENTO dentro de un documento</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="POLIZAType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a pólizas</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FECHA_VEN" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha de vencimiento (AAAA-MM-DD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_NOTARIOS_INT" type="xs:byte">
+				<xs:annotation>
+					<xs:documentation>Número de Notarios intervinientes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FECHA_OPE" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Fecha de la operación (AAAA-MM-DD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_INDUB" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Números de indubitadas</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NUMERO_DOCUMENTO_COMPLETOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos al número de documento/protocolo/asiento del Libro Registro y al número de documento/protocolo bis</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:integer">
+				<xs:attribute name="NUM_DOC_BIS" type="NUMERO_DOCUMENTO_BISType"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TIPO_DOCUMENTOType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTOType">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTO_BISType">
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_FOLIOSType">
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IDIOMAType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="0"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

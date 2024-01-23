@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos para el Notario</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="sujeto.xsd"/>
+	<xs:complexType name="NOTARIOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos al Notario</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="COD_NOTARIO" type="CODIGO_NOTARIOType">
+				<xs:annotation>
+					<xs:documentation>Código del Notario (Código de Ultimas Voluntades)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IDENT" type="IDENTIFICACIONType"/>
+			<xs:element name="NOMBRE" type="NOMBRE_PERSONAType">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APELLIDOS" type="APELLIDOS_PERSONAType">
+				<xs:annotation>
+					<xs:documentation>Apellidos o Razón Social</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NOTARIO_IND_UNICOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos al Notario en el índice único</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="COD_NOTARIO" type="CODIGO_NOTARIOType">
+				<xs:annotation>
+					<xs:documentation>Código del Notario (Código de Ultimas Voluntades)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NOMBRE" type="NOMBRE_PERSONAType">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APELLIDOS" type="APELLIDOS_PERSONAType">
+				<xs:annotation>
+					<xs:documentation>Apellidos o Razón Social</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CODIGO_NOTARIOType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{7}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

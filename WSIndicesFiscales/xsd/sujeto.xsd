@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos y grupos para el sujeto, Persona y Entidad Financiera</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="comun.xsd"/>
+	<xs:include schemaLocation="direccion.xsd"/>
+	<xs:include schemaLocation="objeto.xsd"/>
+	<xs:complexType name="IDENTIFICACIONType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la identificación de un sujeto</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TIPO" type="TIPO_IDENTIDADType">
+				<xs:annotation>
+					<xs:documentation>Tipo de documento de identidad ("1" NIF/CIF, "2" NIE, "3" Pasaporte, "5" Otros)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM" type="NUMERO_IDENTIDADType">
+				<xs:annotation>
+					<xs:documentation>Número del documento de identidad</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IDENTIFICACION_SUJETOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la identificación de un sujeto</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TIPO" type="TIPO_IDENTIDADType">
+				<xs:annotation>
+					<xs:documentation>Tipo de documento de identidad ("1" NIF/CIF, "2" NIE, "3" Pasaporte, "5" Otros)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM" type="NUMERO_IDENTIDADType">
+				<xs:annotation>
+					<xs:documentation>Número del documento de identidad</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="REP_LEG" type="REPRESENTANTE_LEGALType">
+				<xs:annotation>
+					<xs:documentation>Respresentante legal. Indica si el número de documento de identidad expresado en NUM es el del sujeto o el de su representante legal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PERSONAType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a un sujeto tipo persona</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NOMBRE" type="NOMBRE_PERSONAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APELLIDOS">
+				<xs:annotation>
+					<xs:documentation>Apellidos o Razón Social</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="DIR_RES" type="DIRECCIONType"/>
+				<xs:element name="DIR_NO_RES" type="DIRECCION_NO_RESIDENTEType"/>
+			</xs:choice>
+			<xs:element name="TEL" type="TELEFONOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PERSONA_IND_PLUSVALIASType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a un sujeto tipo persona para el índice de plusvalías</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NOMBRE" type="NOMBRE_PERSONAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APELLIDOS">
+				<xs:annotation>
+					<xs:documentation>Apellidos o Razón Social</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="DIR_RES" type="DIRECCION_IND_PLUSVALIASType"/>
+				<xs:element name="DIR_NO_RES" type="DIRECCION_NO_RESIDENTEType"/>
+			</xs:choice>
+			<xs:element name="TEL" type="TELEFONOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PERSONA_IND_FISCALType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a un sujeto tipo persona para el índice fiscal</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NOMBRE" type="NOMBRE_PERSONAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APELLIDOS" type="APELLIDOS_PERSONAType">
+				<xs:annotation>
+					<xs:documentation>Apellidos o Razón Social</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCION_IND_FISCALType"/>
+			<xs:element name="TEL" type="TELEFONOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ENTIDAD_FINANCIERAType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a un sujeto tipo entidad financiera</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NOMBRE">
+				<xs:annotation>
+					<xs:documentation>Nombre</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SICA">
+				<xs:annotation>
+					<xs:documentation>Código de la entidad financiera (SICA)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCION_NORMALIZADAType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SUJETO_INTERVINIENTEType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la intervención de cada uno de los sujetos en cada una de las operaciones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID_SUJ" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Código identificador del sujeto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_INT" type="TIPO_INTERVENCIONType">
+				<xs:annotation>
+					<xs:documentation>Tipo de intervención en la operación. Según tabla</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OBJ_INT" type="OBJETO_INTERVINIENTEType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TIPO_IDENTIDADType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_IDENTIDADType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REPRESENTANTE_LEGALType">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="NOMBRE_PERSONAType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="APELLIDOS_PERSONAType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_INTERVENCIONType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="9"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="14"/>
+			<xs:enumeration value="15"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TIPO_INTERVENCION_TRIBUTABLEType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

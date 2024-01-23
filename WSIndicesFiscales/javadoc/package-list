@@ -1,0 +1,8 @@
+es.tributasenasturias.indices_fiscales
+es.tributasenasturias.indices_fiscales.soap
+es.tributasenasturias.indices_fiscales.utils
+es.tributasenasturias.indices_fiscales.utils.bbdd
+es.tributasenasturias.indices_fiscales.utils.contextoLlamada
+es.tributasenasturias.indices_fiscales.utils.esquema
+es.tributasenasturias.indices_fiscales.utils.log
+es.tributasenasturias.indices_fiscales.utils.preferencias

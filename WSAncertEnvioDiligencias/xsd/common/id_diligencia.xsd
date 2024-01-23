@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/TPAJD/diligencia" xmlns:dil="http://inti.notariado.org/XML/TPAJD/diligencia" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="ID_DILIGENCIAType">
+		<xs:annotation>
+			<xs:documentation>Datos identificativos de la diligencia</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="COD_NOTARIO" type="dil:CODIGO_NOTARIOType">
+				<xs:annotation>
+					<xs:documentation>Identificacion del Notario</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COD_NOTARIA" type="dil:CODIGO_NOTARIAType">
+				<xs:annotation>
+					<xs:documentation>Identificacion unica de la Notaria</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_PROTOCOLO" type="dil:NUMERO_DOCUMENTOType">
+				<xs:annotation>
+					<xs:documentation>Numero  de protocolo de la escritura</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_BIS" type="dil:NUMERO_DOCUMENTO_BISType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Numero de Bis del protocolo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ANYO_AUTORIZACION">
+				<xs:annotation>
+					<xs:documentation>Año de autorizacion</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:totalDigits value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="NUMERO_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Numero de documento/protocolo/asiento del Libro Registro</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTO_BISType">
+		<xs:annotation>
+			<xs:documentation>Numero de documento/protocolo bis</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_NOTARIOType">
+		<xs:annotation>
+			<xs:documentation>Codigo de ultimas voluntades del Notario</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{7}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CODIGO_NOTARIAType">
+		<xs:annotation>
+			<xs:documentation>Codigo de catastro de la Notaria</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

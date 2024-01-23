@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos para los elementos usados en el tipo complejo OPERACION dentro de un documento</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="comun.xsd"/>
+	<xs:complexType name="PRESTAMO_HIPOTECARIOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a préstamos o créditos hipotecarios</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FINALIDAD" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Código de la finalidad del préstamo o crédito ("1" Adquisición de vivienda, "2" Adquisición de otro inmueble, "3" Construcción de vivienda, "4" Construcción de otra edificación, "5" Financiación de promoción empresarial inmobiliaria, "6" Financiación de otras actividades empresariales, "7" Refinanciación de deudas, "98" No consta, "99" Otras)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="98"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PLAZO" type="xs:short" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Plazo expresado en meses</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_INTERES" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Modalidad de tipo de interés ("1" Fijo, "2" Variable con EURIBOR, "3" Variable con IRPH, "4" Variable con CECA, "5" Subsidiado para adquisición de vivienda, "99" Variable con otros índices)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TAE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>TAE</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:totalDigits value="5"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BASES_ARANCELARIASType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a las bases arancelarias y a sus reducciones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BASE" type="IMPORTE_ECONOMICOType">
+				<xs:annotation>
+					<xs:documentation>Base arancelaria aplicable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="REDUC" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reducción arancelaria que corresponde a cada base arancelaria</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:fractionDigits value="2"/>
+						<xs:maxInclusive value="103.00"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CLAVE_OPERACIONType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CLAVE_OPERACION_LEGITIMACIONType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="12001010"/>
+			<xs:enumeration value="12001020"/>
+			<xs:enumeration value="12001999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CLAVE_OPERACION_CERTIFICACIONType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="14001010"/>
+			<xs:enumeration value="14001020"/>
+			<xs:enumeration value="14001030"/>
+			<xs:enumeration value="14999999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IMPUESTO_APLICABLEType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

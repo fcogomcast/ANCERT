@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML/FICHA" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definicion de tipos para la documentacion</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="DESCRIPCION_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Descripci򬟤el documento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Documento en Base64</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="NOMBRE_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Nombre del documento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="FECHA_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Fecha del documento (AAAA-MM-DD)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="TAMANO_DOCUMENTOType">
+		<xs:annotation>
+			<xs:documentation>Tama𭟥n KB del documento</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:element name="DOCUMENTACION">
+		<xs:annotation>
+			<xs:documentation>Documentacion</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DOCUMENTO" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FECHA_DOCUMENTO" type="FECHA_DOCUMENTOType">
+								<xs:annotation>
+									<xs:documentation>Fecha del documento</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DESCRIPCION" type="DESCRIPCION_DOCUMENTOType">
+								<xs:annotation>
+									<xs:documentation>Descripci򬟬ibre del documento</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="NOMBRE" type="NOMBRE_DOCUMENTOType">
+								<xs:annotation>
+									<xs:documentation>Nombre del fichero original</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TAMANO" type="TAMANO_DOCUMENTOType">
+								<xs:annotation>
+									<xs:documentation>Tama𭟥n KB del documento original</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="FICHERO">
+								<xs:annotation>
+									<xs:documentation>Documento PDF en Base64</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="DOCUMENTOType">
+											<xs:attribute name="ID" type="xs:ID" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="FIRMA_FICHERO" type="xs:base64Binary" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Firma por el Notario del nodo "FICHERO" siguiendo el estandar PKCS7</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

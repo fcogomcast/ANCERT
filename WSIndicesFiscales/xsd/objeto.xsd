@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos y grupos para los elementos usados en el tipo complejo OBJETO dentro de un documento</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="comun.xsd"/>
+	<xs:include schemaLocation="direccion.xsd"/>
+	<xs:complexType name="INMUEBLEType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a bienes inmuebles</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="URBANO" type="INMUEBLE_URBANOType" minOccurs="0"/>
+				<xs:element name="RUSTICO" type="INMUEBLE_RUSTICOType" minOccurs="0"/>
+			</xs:choice>
+			<xs:group ref="GRUPO_DATOS_CATASTRALES"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="INMUEBLE_IND_CATASTRALType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a bienes inmuebles para el índice catastral</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="REF_CAT" type="REFERENCIA_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Referencia Catastral</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CLASE_ALT" type="CLASE_ALTERACIONType">
+				<xs:annotation>
+					<xs:documentation>Clase de alteración catastral ("1" Cambio de dominio simple (sin alteración del bien), "2" Obra nueva en construcción, "3" Obra nueva terminada, "4" Otras alteraciones catastrales,"5" Actos de naturaleza urbanística, "6" Variaciones en la composición interna o en la cuota de participación de comunidades o entidades sin personalidad jurídica. Constituciones independientes de usufructo, concesiones administrativas o derechos de superficie, así como su transmisión y extinción)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VER_CAT" type="VERACIDAD_CATASTRALType">
+				<xs:annotation>
+					<xs:documentation>Grado de veracidad de la referencia catastral. Cumplimiento artículo 50 ley 13/1996 ("1" RC de la finca incorporada, "2" RC de la finca incorporada y dudosa, "3" RC incorporada de la finca de origen (art. 51.5), "5" No se ha presentado RC)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VALOR_TRANS" type="IMPORTE_ECONOMICOType">
+				<xs:annotation>
+					<xs:documentation>Precio o valor declarado de transmisión</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCION_INMUEBLE_IND_CATASTRALType"/>
+			<xs:element name="IDE_TRANS" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Identificación del Transmitente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_COT" type="NUM_COT_TRANSType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos transmitientes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUE_TIT" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Identificación del nuevo titular</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_CON" type="NUM_COT_TITULType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COT" type="COTITULARIDADType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descripción de la cotitularidad de nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BOE_38_13FEB" type="BOE_38_13FEBType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="INMUEBLE_IND_PLUSVALIASType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a bienes inmuebles para el índice de plusvalías</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="REF_CAT" type="REFERENCIA_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Referencia Catastral</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CLASE_ALT" type="CLASE_ALTERACIONType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Clase de alteración catastral ("1" Cambio de dominio simple (sin alteración del bien), "2" Obra nueva en construcción, "3" Obra nueva terminada, "4" Otras alteraciones catastrales,"5" Actos de naturaleza urbanística, "6" Variaciones en la composición interna o en la cuota de participación de comunidades o entidades sin personalidad jurídica. Constituciones independientes de usufructo, concesiones administrativas o derechos de superficie, así como su transmisión y extinción)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VER_CAT" type="VERACIDAD_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Grado de veracidad de la referencia catastral. Cumplimiento artículo 50 ley 13/1996 ("1" RC de la finca incorporada, "2" RC de la finca incorporada y dudosa, "3" RC incorporada de la finca de origen (art. 51.5), "5" No se ha presentado RC)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VALOR_TRANS" type="IMPORTE_ECONOMICOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Precio o valor declarado de transmisión</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCION_INMUEBLE_IND_CATASTRALType"/>
+			<xs:element name="IDE_TRANS" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Identificación del Transmitente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_COT" type="NUM_COT_TRANSType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos transmitientes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUE_TIT" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Identificación del nuevo titular</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_CON" type="NUM_COT_TITULType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COT" type="COTITULARIDADType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descripción de la cotitularidad de nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="INMUEBLE_URBANOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a bienes inmuebles urbanos usado</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CLASE">
+				<xs:annotation>
+					<xs:documentation>Código de la clase de inmueble urbano ("1" Vivienda-piso libre, "2" Vivienda-unifamiliar libre, "3" Vivienda-piso de protección oficial, "4" Vivienda-unifamiliar de protección oficial, "5" Aparcamiento, "6" Trastero, "7" Local de negocio en edificio de viviendas, "8" Local de negocio en edificio exclusivo, "9" Oficina en edificio de viviendas, "10" Oficina en edificio de oficinas, "11" Nave industrial, "12" Terreno, "99" Otras edificaciones)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+						<xs:enumeration value="6"/>
+						<xs:enumeration value="7"/>
+						<xs:enumeration value="8"/>
+						<xs:enumeration value="9"/>
+						<xs:enumeration value="10"/>
+						<xs:enumeration value="11"/>
+						<xs:enumeration value="12"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TIPO">
+				<xs:annotation>
+					<xs:documentation>Código del tipo de construcción ("0" Sin construcción, "1" Nueva construcción en promoción para venta, "2" Nueva construcción en promoción cooperativa, "3" Nueva construcción en régimen de comunidad, "4" De segunda mano, "5" En construcción)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="FORMA_PAGO">
+				<xs:annotation>
+					<xs:documentation>Bloque con datos relativos a la forma de pago del precio o contraprestación ("1" Todo recibido por el vendedor, "2" Subrogación en todo o en parte en préstamo o crédito hipotecario del vendedor, "3" En todo o en parte aplazado, "4" Concurrencia de los dos supuestos anteriores, "99" Otros)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+						<xs:enumeration value="4"/>
+						<xs:enumeration value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SUPERFICIE" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Superficie del inmueble urbano en metros cuadrados</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APART_ANEJ">
+				<xs:annotation>
+					<xs:documentation>Aparcamiento anejo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:boolean"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TRAST_ANEJ">
+				<xs:annotation>
+					<xs:documentation>Trastero anejo</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:boolean"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="INMUEBLE_RUSTICOType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a bienes inmuebles rústicos</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NATURALEZA">
+				<xs:annotation>
+					<xs:documentation>Código de la naturaleza de la finca ("1" Secano, "2" Regadío, "3" Mixta)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+						<xs:enumeration value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="UNIDAD_MEDIDA" type="UNIDAD_MEDIDAType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unidad de medida de la superfície</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SUPERFICIE" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>Superficie del inmueble rústico</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OBJETO_INTERVINIENTEType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la intervención de cada uno de los objetos en cada una de las operaciones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID_OBJ" type="ID_SECUENCIALType">
+				<xs:annotation>
+					<xs:documentation>Código identificador del objeto</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="POR_COT" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Porcentaje de participación en el pleno dominio de cada cotitular</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:byte">
+						<xs:minInclusive value="0"/>
+						<xs:maxInclusive value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:group name="GRUPO_DATOS_CATASTRALES">
+		<xs:sequence>
+			<xs:element name="REF_CAT" type="REFERENCIA_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Referencia Catastral</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CLASE_ALT" type="CLASE_ALTERACIONType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Clase de alteración catastral ("1" Cambio de dominio simple (sin alteración del bien), "2" Obra nueva en construcción, "3" Obra nueva terminada, "4" Otras alteraciones catastrales,"5" Actos de naturaleza urbanística, "6" Variaciones en la composición interna o en la cuota de participación de comunidades o entidades sin personalidad jurídica. Constituciones independientes de usufructo, concesiones administrativas o derechos de superficie, así como su transmisión y extinción)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VER_CAT" type="VERACIDAD_CATASTRALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Grado de veracidad de la referencia catastral. Cumplimiento artículo 50 ley 13/1996 ("1" RC de la finca incorporada, "2" RC de la finca incorporada y dudosa, "3" RC incorporada de la finca de origen (art. 51.5), "5" No se ha presentado RC)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VALOR_TRANS" type="IMPORTE_ECONOMICOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Precio o valor declarado de transmisión</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCION_INMUEBLEType" minOccurs="0"/>
+			<xs:element name="IDE_TRANS" type="ID_SECUENCIALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identificación del Transmitente</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_COT" type="NUM_COT_TRANSType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos transmitientes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUE_TIT" type="ID_SECUENCIALType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identificación del nuevo titular</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NUM_CON" type="NUM_COT_TITULType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de cotitulares entre los nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="COT" type="COTITULARIDADType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Descripción de la cotitularidad de nuevos titulares</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TIPO_INMUEBLE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tipo de inmueble ("R" Rústico , "U" Urbano)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="R"/>
+						<xs:enumeration value="U"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="BOE_38_13FEB" type="BOE_38_13FEBType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:simpleType name="REFERENCIA_CATASTRALType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VERACIDAD_CATASTRALType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CLASE_ALTERACIONType">
+		<xs:restriction base="xs:byte">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUM_COT_TRANSType">
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUM_COT_TITULType">
+		<xs:restriction base="xs:short">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="COTITULARIDADType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:pattern value="[^\r\n\t]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BOE_38_13FEBType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a inmuebles rústicos según el BOE_38_13FEB para el índice catastral</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UNIDAD_MEDIDA" type="UNIDAD_MEDIDAType">
+				<xs:annotation>
+					<xs:documentation>Unidad de medida de la superficie  ("CA" , "HA" , "A" )</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SUPERFICIE" type="SUPERFICIEType">
+				<xs:annotation>
+					<xs:documentation>Superficie del inmueble rústico</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PARAJE" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Paraje</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:pattern value="[^\r\n\t]*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="POLIGONO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Polígono</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minExclusive value="0"/>
+						<xs:maxExclusive value="999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PARCELA" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parcela</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minExclusive value="0"/>
+						<xs:maxInclusive value="99999"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="UNIDAD_MEDIDAType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CA"/>
+			<xs:enumeration value="HA"/>
+			<xs:enumeration value="A"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SUPERFICIEType">
+		<xs:restriction base="xs:integer">
+			<xs:minExclusive value="0"/>
+			<xs:totalDigits value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

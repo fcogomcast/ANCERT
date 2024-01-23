@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML/COMUNICACIONES" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML/COMUNICACIONES" elementFormDefault="qualified" attributeFormDefault="unqualified"
+xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    jaxb:version="2.0">
+<!-- Comentado. Pasado a un fichero de binding externo. -->
+    <xs:annotation>
+        <xs:appinfo>
+           <jaxb:globalBindings>
+         	<jaxb:javaType name="java.lang.String"
+        		xmlType="xs:base64Binary">
+    		</jaxb:javaType>
+    	  </jaxb:globalBindings>
+        </xs:appinfo>
+    </xs:annotation>
+	<xs:element name="COMUNICACION">
+		<xs:annotation>
+			<xs:documentation>Esquema para las comunicaciones de copias de escrituras y fichas notariales a los ayuntamientos
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="REQUEST">
+					<xs:annotation>
+						<xs:documentation>XML de Peticion</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CABECERA" type="CABECERAType">
+								<xs:annotation>
+									<xs:documentation>Cabecera del mensaje</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="DATOS_COMUNICACION">
+								<xs:annotation>
+									<xs:documentation>Datos identificativos de la comunicacion
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="CODIGO_AYUNTAMIENTO">
+											<xs:annotation>
+												<xs:documentation>Código ine del ayuntamiento</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:length value="6"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TIPO_COMUNICACION">
+											<xs:annotation>
+												<xs:documentation>Tipo de comunicación</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="COPIA"/>
+													<xs:enumeration value="FICHA"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="CODIGO_ULTIMAS_VOLUNTADES">
+											<xs:annotation>
+												<xs:documentation>Código de ultimas voluntades del notario</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:length value="7"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="CODIGO_NOTARIA">
+											<xs:annotation>
+												<xs:documentation>Código de catastro</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:length value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="NOTARIO">
+											<xs:annotation>
+												<xs:documentation>Nombre y apellidos del notario</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="200"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="NOTARIA">
+											<xs:annotation>
+												<xs:documentation>Descripción de la notaría</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="100"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="TIPO_DOCUMENTO" type="TIPO_DOCUMENTOType">
+											<xs:annotation>
+												<xs:documentation>Tipo de documento del documento notarial</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="NUMERO_DOCUMENTO" type="NUMERO_DOCUMENTOType">
+											<xs:annotation>
+												<xs:documentation>Numero de documento notarial</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="NUMERO_DOCUMENTO_BIS" type="NUMERO_DOCUMENTO_BISType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Numero de documento bis</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="FECHA_AUTORIZACION" type="xs:date">
+											<xs:annotation>
+												<xs:documentation>Fecha de autorización del documento</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="NOMBRE_FICHERO" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Nombre del fichero</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="FICHERO" type="xs:base64Binary">
+											<xs:annotation>
+												<xs:documentation>
+												Si el TIPO_COMUNICACION es COPIA se enviará la copia de escritura en formato pdf. 
+												Si el  TIPO_COMUNICACION es FICHA se enviará un zip que contandrá dos ficheros:
+													 	1) Documento de intercambio de información fiscalmente relevante (xml)
+													 	2) Informe de cotejo (pdf)
+												</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="RESPONSE">
+					<xs:annotation>
+						<xs:documentation>XML de respuesta</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CABECERA" type="CABECERAType">
+								<xs:annotation>
+									<xs:documentation>Cabecera del mensaje</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="COD_ERROR">
+								<xs:annotation>
+									<xs:documentation>Código de error.0 indica que la carga ha sido satisfactoria. 1 indica que ha habido un error genérico, no se reintentará el envío. 2 indica que ha habido un error temporal y se va a reenviar la misma comunicación.		
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:enumeration value="0"/>
+										<xs:enumeration value="1"/>
+										<xs:enumeration value="2"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="ERROR" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Descripcion del error</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="JUSTIFICANTE_RECEPCION_COPIA" type="xs:base64Binary" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Si el TIPO_COMUNICACION es COPIA será obligatorio por parte de la entidad la generación de un justificante de recepcion</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CABECERAType">
+		<xs:all>
+			<xs:element name="TIMESTAMP" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Timestamping sobre el envio del mensaje</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EMISOR">
+				<xs:annotation>
+					<xs:documentation>Código representativo de la entidad emisora (CGN
+							para el REQUEST y código ine de de 6 dígitos del ayuntamiento para la RESPONSE)
+						</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="1"/>
+						<xs:maxLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RECEPTOR">
+				<xs:annotation>
+					<xs:documentation>Código de la entidad Receptora (Código ine de 6 dígitos del  ayuntamiento para el REQUEST, y CGN para la RESPONSE)
+						</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:whiteSpace value="collapse"/>
+						<xs:minLength value="1"/>
+						<xs:maxLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:simpleType name="TIPO_DOCUMENTOType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+			<xs:enumeration value="5"/>
+			<xs:enumeration value="6"/>
+			<xs:enumeration value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTOType">
+		<xs:restriction base="xs:unsignedInt">
+			<xs:totalDigits value="6"/>
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NUMERO_DOCUMENTO_BISType">
+		<xs:restriction base="xs:unsignedInt">
+			<xs:totalDigits value="3"/>
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

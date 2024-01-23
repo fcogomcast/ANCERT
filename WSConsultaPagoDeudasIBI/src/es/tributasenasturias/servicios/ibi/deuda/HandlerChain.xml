@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+  <handler-chain>
+    <handler>
+      <handler-name>es.tributasenasturias.servicios.ibi.deuda.soap.ValidacionCertificado</handler-name>
+      <handler-class>es.tributasenasturias.servicios.ibi.deuda.soap.ValidacionCertificado</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.tributasenasturias.servicios.ibi.deuda.soap.GestionFirmaWS</handler-name>
+      <handler-class>es.tributasenasturias.servicios.ibi.deuda.soap.GestionFirmaWS</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.tributasenasturias.servicios.ibi.deuda.soap.ValidadorEsquema</handler-name>
+      <handler-class>es.tributasenasturias.servicios.ibi.deuda.soap.ValidadorEsquema</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.tributasenasturias.servicios.ibi.deuda.soap.SoapServerHandler</handler-name>
+      <handler-class>es.tributasenasturias.servicios.ibi.deuda.soap.SoapServerHandler</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.tributasenasturias.servicios.ibi.deuda.soap.CargaContexto</handler-name>
+      <handler-class>es.tributasenasturias.servicios.ibi.deuda.soap.CargaContexto</handler-class>
+    </handler>
+  </handler-chain>
+</handler-chains>

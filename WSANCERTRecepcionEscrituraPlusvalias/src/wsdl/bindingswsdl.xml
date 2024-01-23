@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Fichero de personalización. -->
+<!--  Realiza lo siguiente: Mapea cualquier tipo xs:base64Binary a tipo String Java, porque no queremos -->
+<!--  que lo convierta a array de bytes, que es el comportamiento por defecto, porque vamos a manejar -->
+<!--  el texto de base 64. También modifica el nombre para la clase generada como interfaz de servicio -->
+<jaxws:bindings
+	xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+<jaxws:bindings node="wsdl:definitions/wsdl:types/xsd:schema">
+     <jaxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    node="//xs:schema/xs:include" schemaLocation="ComunicacionesAyuntamiento.xsd">
+		<jaxb:globalBindings>
+         	<jaxb:javaType name="java.lang.String"
+        		xmlType="xs:base64Binary">
+    		</jaxb:javaType>
+    	  </jaxb:globalBindings>
+     </jaxb:bindings>
+</jaxws:bindings>
+<!-- Interfaz generada -->
+<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='SOAPGateway']">
+	<jaxws:class name="RecepcionEscritura"></jaxws:class>
+</jaxws:bindings>     
+<!-- Clase generada. No parece funcionar, se cambia el nombre una vez generado. -->
+<jaxws:bindings node="wsdl:definitions/wsdl:service[@name='SOAPGatewayService']">
+	<jaxws:class name="RecepcionEscrituraImpl"></jaxws:class>
+</jaxws:bindings>
+</jaxws:bindings>

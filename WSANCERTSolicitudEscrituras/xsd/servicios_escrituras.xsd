@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	<xs:include schemaLocation="common/documentacion.xsd"/>
+	<xs:include schemaLocation="common/cabecera.xsd"/>
+	<xs:include schemaLocation="common/id_escritura.xsd"/>
+	<xs:include schemaLocation="common/resultado.xsd"/>
+	<xs:annotation>
+		<xs:documentation>Esquema para la peticion y respuesta de operaciones relacionadas con escrituras</xs:documentation>
+	</xs:annotation>
+	<xs:element name="SERVICIOS_ESCRITURA">
+		<xs:annotation>
+			<xs:documentation>Elemento raiz para la solicitud de Copias</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="REQUEST">
+						<xs:annotation>
+							<xs:documentation>Datos que debe enviar el organismo que Solicite una copia</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="CABECERAType">
+												<xs:sequence>
+													<xs:element name="OPERACION" type="OPERACIONType">
+														<xs:annotation>
+															<xs:documentation>Operacion a realizar:
+ 07 - Solicitud de copia y Envío de copias</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ID_ESCRITURA" type="ID_ESCRITURAType"/>
+								<xs:element name="DESTINATARIO">
+									<xs:annotation>
+										<xs:documentation>Departamento del organismo solicitante destinatario de la copia electrónica solicitada</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="1"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="FINALIDAD">
+									<xs:annotation>
+										<xs:documentation>Descripción extendida del motivo por el que se solicita la copia. Debe ser suficiente para que el notario pueda apreciar el interés légitimo del solicitante a recibir la copia solicitada.</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="100"/>
+											<xs:maxLength value="475"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="TIPO_COPIA">
+									<xs:annotation>
+										<xs:documentation>Tipo de copia Solicitada
+SIMPLE - Copia simple elctronica sin documentos unidos.
+SIMPLE CON UNIDOS - Copia simple electrónica con los documentos unidos a la escritura.
+AUTORIZADA -  Copia electrónica Autorizada</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="SIMPLE"/>
+											<xs:enumeration value="SIMPLE CON UNIDOS"/>
+											<xs:enumeration value="AUTORIZADA"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="PERSONA_SOLICITANTE">
+									<xs:annotation>
+										<xs:documentation>Funcionario a cargo de la solicitud realizada.</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="DNI_RESPONSABLE">
+												<xs:annotation>
+													<xs:documentation>DNI de la persona responsable de la solicitud</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:length value="9"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="NOMBRE_RESPONSABLE">
+												<xs:annotation>
+													<xs:documentation>Nombre de la persona responsable de la solicitud</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="40"/>
+														<xs:minLength value="1"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="CARGO_RESPONSABLE">
+												<xs:annotation>
+													<xs:documentation>Cargo de la persona responsable de la solicitud</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="35"/>
+														<xs:minLength value="1"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="TIPO_PROCEDIMIENTO">
+									<xs:annotation>
+										<xs:documentation>Tipo de procedimiento abierto por el organismo solicitante, que justifica la solicita de la copia (Gestión, Recaudación...)</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="4"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="NUMERO_EXPEDIENTE">
+									<xs:annotation>
+										<xs:documentation>Número de expediente asocieado a la solicitud dentro del procedimiento abierto por el organismo solicitante</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="3"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="OTORGANTES" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Persona/s que otorga/n la escritura. Se utilizarán para comprobar que el número de documento solicitado es el correcto.</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="NOMBRE_OTORGANTE">
+												<xs:annotation>
+													<xs:documentation>Nombre del otorgante</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:minLength value="1"/>
+														<xs:maxLength value="60"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="DNI_OTORGANTE">
+												<xs:annotation>
+													<xs:documentation>Numero de documento de identidad del otorgante</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:length value="9"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="FICHERO" type="xs:base64Binary">
+									<xs:annotation>
+										<xs:documentation>Documento PDF en Base64 que debe contener la solicitud en un formato imprimible por la notaria.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="REPLY">
+						<xs:annotation>
+							<xs:documentation>Datos enviados del servidor del CGN a la Comunidad Autonoma</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="CABECERA">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="CABECERAType">
+												<xs:sequence>
+													<xs:element name="OPERACION" type="OPERACIONType">
+														<xs:annotation>
+															<xs:documentation>Operacion a realizar:
+07 - Solicitud de copia</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element ref="RESULTADO"/>
+								<xs:element name="ID_ESCRITURA" type="ID_ESCRITURAType"/>
+							</xs:sequence>
+							<xs:attribute name="ID" type="xs:ID" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+				<xs:any namespace="##any" processContents="lax" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Firma de servidor  del  "REQUEST" o "REPLY" siguiendo el estandar XMLDSIG</xs:documentation>
+					</xs:annotation>
+				</xs:any>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

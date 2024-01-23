@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by INTI S.L. (INTI S.L.) -->
+<xs:schema targetNamespace="http://inti.notariado.org/XML/FICHA" xmlns="http://inti.notariado.org/XML/FICHA" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="tipos.xsd"/>
+	<xs:complexType name="CABECERAType">
+		<xs:annotation>
+			<xs:documentation>Datos identificativos de la comunicacion</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FECHA" type="FECHA_GENERACIONType">
+				<xs:annotation>
+					<xs:documentation>Fecha de generacion del mensaje</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HORA" type="HORA_GENERACIONType">
+				<xs:annotation>
+					<xs:documentation>Hora de generacion del mensaje en formato HH:MM:SS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID_COMUNICACION" type="ID_COMUNICACIONType">
+				<xs:annotation>
+					<xs:documentation>Numero identificativo del mensaje</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="APLICACION" type="APLICACIONType">
+				<xs:annotation>
+					<xs:documentation>Nombre de la Aplicacion que genera la solicitud</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EMISOR" type="EMISORType">
+				<xs:annotation>
+					<xs:documentation>Entidad emisora del mensaje.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RECEPTOR" type="RECEPTORType">
+				<xs:annotation>
+					<xs:documentation>Entidad receptora del mensaje.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

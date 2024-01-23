@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="mensajes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="mensaje">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="1" name="codigo" type="xs:string"/>
+              <xs:element minOccurs="1" name="texto" type="xs:string"/>
+              <xs:element minOccurs="0" name="descripcion" type="xs:string">
+              	<xs:annotation><xs:documentation>Permite describir el error. Es un valor puramente informativo, no se utiliza en la aplicación.</xs:documentation></xs:annotation>
+              </xs:element>
+              <xs:element minOccurs="0" name="esError" type="xs:string"/>
+              <xs:element minOccurs="0" name="interno" type="xs:string">
+              	<xs:annotation><xs:documentation>Indica si es de uso interno por la aplicación (S) o no (otro valor)</xs:documentation></xs:annotation>
+              </xs:element>
+              <xs:element minOccurs="0" name="externo" type="xs:string">
+              	<xs:annotation><xs:documentation>Indica si es un mensaje al exterior (respuestas a otros servicios) o no. S=es externo, otro valor=no lo es)</xs:documentation></xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string" use="required"><xs:annotation><xs:documentation>Identificador/Alias del mensaje, se utilizará para mapeos. Siempre debería haber un mensaje con identificador "default", será el error por defecto si no se encuentra otro.</xs:documentation></xs:annotation></xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

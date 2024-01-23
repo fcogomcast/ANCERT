@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
+  <handler-chain>
+    <handler>
+      <handler-name>es.stpa.plusvalias.soap.ValidacionCertificado</handler-name>
+      <handler-class>es.stpa.plusvalias.soap.ValidacionCertificado</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.stpa.plusvalias.soap.GestionFirmaWS</handler-name>
+      <handler-class>es.stpa.plusvalias.soap.GestionFirmaWS</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.stpa.plusvalias.soap.SoapServerHandler</handler-name>
+      <handler-class>es.stpa.plusvalias.soap.SoapServerHandler</handler-class>
+    </handler>
+    <handler>
+      <handler-name>es.stpa.plusvalias.soap.CargaContexto</handler-name>
+      <handler-class>es.stpa.plusvalias.soap.CargaContexto</handler-class>
+    </handler>
+  </handler-chain>
+</handler-chains>

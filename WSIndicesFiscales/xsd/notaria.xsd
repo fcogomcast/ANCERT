@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://inti.notariado.org/XML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://inti.notariado.org/XML" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>Definición de tipos para la Notaría</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="comun.xsd"/>
+	<xs:include schemaLocation="direccion.xsd"/>
+	<xs:complexType name="NOTARIAType">
+		<xs:annotation>
+			<xs:documentation>Bloque con datos relativos a la Notaría</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="COD_NOTARIA" type="CODIGO_NOTARIAType">
+				<xs:annotation>
+					<xs:documentation>Código de la Notaría</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NOMBRE">
+				<xs:annotation>
+					<xs:documentation>Nombre de la Notaría</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="DIR" type="DIRECCIONType"/>
+			<xs:element name="TEL" type="TELEFONOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de teléfono</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FAX" type="TELEFONOType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Número de fax</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CODIGO_NOTARIAType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
