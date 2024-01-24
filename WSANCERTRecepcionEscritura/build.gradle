@@ -17,6 +17,7 @@ dependencies {
     implementation fileTree(dir: 'webcontent/WEB-INF/lib', include: ['*.jar'])
     //implementation fileTree(dir: 'webcontent/WEB-INF', include: ['*.xml'])
     //implementation 'javax.servlet:javax.servlet-api:3.1.0'
+    //implementation 'com.sun.xml.ws:jaxws-rt:2.2.10'
     // Añade otras dependencias aquí
 }
 // Ruta de las clases Java a compilar
@@ -36,7 +37,17 @@ tasks.withType(JavaCompile) {
 // Configuración específica para el plugin 'war'
 war {
     archiveFileName = "$buildDir/target/WSANCERTRecepcionEscritura.war" // Cambia esto por el nombre que desees para tu archivo WAR
-    from 'wsdl'
+
+    from('wsdl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes'
+    }
+
+    from('src/es/tributasenasturias/services/ancert/recepcionescritura') {
+        include '**/*.xml'
+        into 'WEB-INF/classes/es/tributasenasturias/services/ancert/recepcionescritura'
+    }
+
     // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {
