@@ -7,17 +7,18 @@ repositories {
     jcenter()
 }
 
-// Configuración de compilación y ejecución
+// Configuraciï¿½n de compilaciï¿½n y ejecuciï¿½n
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 // Dependencias del proyecto
 dependencies {
-    // Añade las dependencias que necesites desde la carpeta 'webcontent/lib'
+    // Aï¿½ade las dependencias que necesites desde la carpeta 'webcontent/lib'
     implementation fileTree(dir: 'webcontent/WEB-INF/lib', include: ['*.jar'])
     //implementation fileTree(dir: 'webcontent/WEB-INF', include: ['*.xml'])
     //implementation 'javax.servlet:javax.servlet-api:3.1.0'
-    // Añade otras dependencias aquí
+    compileOnly 'javax.servlet:servlet-api:2.5'
+    // Aï¿½ade otras dependencias aquï¿½
 }
 // Ruta de las clases Java a compilar
 sourceSets {
@@ -28,15 +29,33 @@ sourceSets {
     }
 }
 
-// Tareas de compilación y empaquetado
+// Tareas de compilaciï¿½n y empaquetado
 tasks.withType(JavaCompile) {
     options.encoding = 'Cp1252'
 }
 
-// Configuración específica para el plugin 'war'
+// Configuracion especifica para el plugin 'war'
 war {
     archiveFileName = "$buildDir/target/WSANCERTSolicitudEscrituras.war" // Cambia esto por el nombre que desees para tu archivo WAR
-    from 'wsdl'
+
+    // Agrega los archivos WSDL
+    from('wsdl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes'
+    }
+
+    // Agrega los archivos XSD
+    from('xsd') {
+        include '**/*.xsd'
+        into 'WEB-INF/classes'
+    }
+
+    // Agrega el archivo HandlerChain.xml
+    from('src/es/tributasenasturias/services/ancert/solicitudEscritura') {
+        include '**/*.xml'
+        into 'WEB-INF/classes/es/tributasenasturias/services/ancert/solicitudEscritura'
+    }
+
     // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {
@@ -44,4 +63,3 @@ war {
         }
     }
 }
-
