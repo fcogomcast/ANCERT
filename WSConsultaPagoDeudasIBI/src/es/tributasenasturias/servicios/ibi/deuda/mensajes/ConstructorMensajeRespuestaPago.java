@@ -2,6 +2,11 @@ package es.tributasenasturias.servicios.ibi.deuda.mensajes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+/**
+ * Añadido paquete Base64 y cambiados los métodos de Encode y Decode acuerdo al estándar de la nueva librería:
+ * Base64.getDecoder().decode(variable)
+ */
 import java.util.Base64;
 
 import es.tributasenasturias.servicios.ibi.deuda.CABECERAType;
