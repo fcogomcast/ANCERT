@@ -8,7 +8,7 @@ import java.util.List;
 import javax.xml.ws.Binding;
 import javax.xml.ws.handler.Handler;
 
-import com.sun.xml.internal.ws.client.BindingProviderProperties;
+import com.sun.xml.ws.client.BindingProviderProperties;
 
 import es.tributasenasturias.services.ancert.recepcionescritura.context.CallContext;
 import es.tributasenasturias.services.ancert.recepcionescritura.context.IContextReader;
