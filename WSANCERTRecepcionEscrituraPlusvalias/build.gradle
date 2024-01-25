@@ -7,17 +7,17 @@ repositories {
     jcenter()
 }
 
-// Configuración de compilación y ejecución
+// Configuraciï¿½n de compilaciï¿½n y ejecuciï¿½n
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 // Dependencias del proyecto
 dependencies {
-    // Añade las dependencias que necesites desde la carpeta 'webcontent/lib'
+    // Aï¿½ade las dependencias que necesites desde la carpeta 'webcontent/lib'
     implementation fileTree(dir: 'webcontent/WEB-INF/lib', include: ['*.jar'])
     //implementation fileTree(dir: 'webcontent/WEB-INF', include: ['*.xml'])
     //implementation 'javax.servlet:javax.servlet-api:3.1.0'
-    // Añade otras dependencias aquí
+    // Aï¿½ade otras dependencias aquï¿½
 }
 // Ruta de las clases Java a compilar
 sourceSets {
@@ -28,15 +28,24 @@ sourceSets {
     }
 }
 
-// Tareas de compilación y empaquetado
+// Tareas de compilaciï¿½n y empaquetado
 tasks.withType(JavaCompile) {
     options.encoding = 'Cp1252'
 }
 
-// Configuración específica para el plugin 'war'
+// Configuraciï¿½n especï¿½fica para el plugin 'war'
 war {
     archiveFileName = "$buildDir/target/WSANCERTRecepcionEscrituraPlusvalias.war" // Cambia esto por el nombre que desees para tu archivo WAR
-    from 'wsdl'
+    from('wsdl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes'
+    }
+
+    from('src/org/notariado/inti') {
+        include '**/*.xml'
+        into 'WEB-INF/classes/org/notariado/inti'
+    }
+
     // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {

@@ -36,7 +36,16 @@ tasks.withType(JavaCompile) {
 // Configuración específica para el plugin 'war'
 war {
     archiveFileName = "$buildDir/target/WSConsultaPagoDeudasIBI.war" // Cambia esto por el nombre que desees para tu archivo WAR
-    from 'wsdl'
+    from('wsdl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes'
+    }
+
+    from('src/es/tributasenasturias/servicios/ibi/deuda') {
+        include '**/*.xml'
+        into 'WEB-INF/classes/es/tributasenasturias/servicios/ibi/deuda'
+    }
+
     // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {

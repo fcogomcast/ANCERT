@@ -2,8 +2,7 @@ package es.tributasenasturias.servicios.ibi.deuda.mensajes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.certicom.security.cert.internal.x509.Base64;
+import java.util.Base64;
 
 import es.tributasenasturias.servicios.ibi.deuda.CABECERAType;
 import es.tributasenasturias.servicios.ibi.deuda.MESSAGERESPONSE;
@@ -66,10 +65,10 @@ public class ConstructorMensajeRespuestaPago {
 		//Datos
 		DATOS datos = new DATOS();
 		JUSTIFICANTEPAGO just = new JUSTIFICANTEPAGO();
-		just.setDOCUMENTO(Base64.decode(justPago));
+		just.setDOCUMENTO(Base64.getDecoder().decode(justPago));
 		just.setNUMJUSTIFICANTEPAGO(numJustif);
 		datos.setJUSTIFICANTEPAGO(just);
-		datos.setDOCUMENTOJUSTSINDEUDAS(Base64.decode(nodeuda));
+		datos.setDOCUMENTOJUSTSINDEUDAS(Base64.getDecoder().decode(nodeuda));
 		datos.setIMPORTEPAGADO(importe);
 		
 		RESULTADOType resultado = new RESULTADOType();
