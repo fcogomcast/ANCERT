@@ -47,6 +47,11 @@ war {
         into 'WEB-INF/classes/es/tributasenasturias/fichas'
     }
 
+    from('src/es/tributasenasturias/lanzador/impl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes/es/tributasenasturias/lanzador/impl'
+    }
+
         // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {
