@@ -27,11 +27,11 @@ import es.tributasenasturias.services.firmadigital.WsFirmaDigital;
 public class FirmaHelper implements IContextReader{
 	
 	private CallContext context;
-	//Timeout de la firma, la operación no puede tardar más de estos milisegundos.
+	//Timeout de la firma, la operaciï¿½n no puede tardar mï¿½s de estos milisegundos.
 	private static final String TIMEOUT="60000";
 	/**
-	 * Genera un port de firma digital con el endpoint que se pasa por parámetro.
-	 * Además, configura el log de la firma digital.
+	 * Genera un port de firma digital con el endpoint que se pasa por parï¿½metro.
+	 * Ademï¿½s, configura el log de la firma digital.
 	 * @param endpoint Endpoint de firma digital
 	 * @return FirmaDigital generado que apunta al endpoint indicado.
 	 */
@@ -46,8 +46,8 @@ public class FirmaHelper implements IContextReader{
 			bpr.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,endpoint);
 			//Se establece un tiempo de Timeout. 
 			bpr.getRequestContext().put (BindingProviderProperties.REQUEST_TIMEOUT,TIMEOUT);
-			//Se procesan los mensajes, guardándolos en el log
-			//Este log será inmenso, no estoy seguro de que deba ser este, sino uno quizá por día.
+			//Se procesan los mensajes, guardï¿½ndolos en el log
+			//Este log serï¿½ inmenso, no estoy seguro de que deba ser este, sino uno quizï¿½ por dï¿½a.
 			Binding bi = bpr.getBinding();
 			List <Handler> handlerList = bi.getHandlerChain();
 			if (handlerList == null)
@@ -74,9 +74,13 @@ public class FirmaHelper implements IContextReader{
 			FirmaDigital srPort = getPort (endpointFirma);
 			try
 			{
+				log.debug("Endpoint de Firma: " + endpointFirma);
+				log.debug("Alias Certificado: " + pr.getAliasCertificadoFirma());
+
+
 				String msgText=XMLDOMUtils.getXMLText(doc);
 				//CRUBENCVS 47084. 06/02/2023. Se utiliza la nueva firma que permite SHA2
-				//La validación también acepta firmas SHA2, pero no cambia la llamada.
+				//La validaciï¿½n tambiï¿½n acepta firmas SHA2, pero no cambia la llamada.
 				//String msgFirmado = srPort.firmarXML(msgText, pr.getAliasCertificadoFirma(), pr.getIdNodoFirmar(), pr.getNodoContenedorFirma(), pr.getNsNodoContenedorFirma());
 				String msgFirmado = srPort.firmarXMLAlgoritmo(msgText, pr.getAliasCertificadoFirma(), pr.getIdNodoFirmar(), pr.getNodoContenedorFirma(), pr.getNsNodoContenedorFirma(), pr.getUriAlgoritmoFirma(), pr.getUriAlgoritmoDigest());
 				//FIN CRUBENCVS 47084

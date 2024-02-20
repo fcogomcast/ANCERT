@@ -43,6 +43,16 @@ war {
         into 'WEB-INF/classes'
     }
 
+    from('src/wsdl') {
+        include '**/*.wsdl'
+        into 'WEB-INF/classes/wsdl'
+    }
+
+    from('src/xsd') {
+        include '**/*.xsd'
+        into 'WEB-INF/classes/xsd'
+    }
+
     from('src/es/tributasenasturias/services/ancert/recepcionescritura') {
         include '**/*.xml'
         into 'WEB-INF/classes/es/tributasenasturias/services/ancert/recepcionescritura'
