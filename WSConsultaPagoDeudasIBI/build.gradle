@@ -41,9 +41,18 @@ war {
         into 'WEB-INF/classes'
     }
 
+    from('xsd') {
+        include '**/*.xsd'
+        into 'WEB-INF/classes/xsd'
+    }
+
     from('src/es/tributasenasturias/servicios/ibi/deuda') {
         include '**/*.xml'
         into 'WEB-INF/classes/es/tributasenasturias/servicios/ibi/deuda'
+    }
+
+    from('src/es/tributasenasturias/servicios/ibi/deuda/wsdl') {
+        into 'WEB-INF/classes/es/tributasenasturias/servicios/ibi/deuda/wsdl'
     }
 
     // Agrega solo los archivos XML de la carpeta WEB-INF
