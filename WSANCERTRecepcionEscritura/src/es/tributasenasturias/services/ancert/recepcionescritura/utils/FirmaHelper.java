@@ -28,7 +28,8 @@ public class FirmaHelper implements IContextReader{
 	
 	private CallContext context;
 	//Timeout de la firma, la operaci�n no puede tardar m�s de estos milisegundos.
-	private static final String TIMEOUT="60000";
+	//private static final String TIMEOUT="60000";
+	private static final int TIMEOUT= 60000;
 	/**
 	 * Genera un port de firma digital con el endpoint que se pasa por par�metro.
 	 * Adem�s, configura el log de la firma digital.

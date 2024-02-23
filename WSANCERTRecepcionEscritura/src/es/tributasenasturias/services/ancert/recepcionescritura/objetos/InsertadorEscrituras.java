@@ -25,20 +25,20 @@ import es.tributasenasturias.webservice.EscriturasAncert;
 import es.tributasenasturias.webservice.EscriturasAncertService;
 
 /**
- * Implementa la inserción de escrituras.
+ * Implementa la inserciï¿½n de escrituras.
  * @author crubencvs
  *
  */
 public class InsertadorEscrituras implements IContextReader{
 	private CallContext context;
-	//Timeout de la operación de inserción de escritura.
+	//Timeout de la operaciï¿½n de inserciï¿½n de escritura.
 	//Por encima de 90 segundos, lo consideramos demasiado,
 	//y ya 90 es mucho, pero puede haber escrituras muy grandes, y pueden llegar en momentos  
-	//en que el servidor está muy ocupado.
-	private final static String TIMEOUT="90000";
-	
+	//en que el servidor estï¿½ muy ocupado.
+	//private final static String TIMEOUT="90000";
+	private static final int TIMEOUT= 60000;
 	private enum TipoArchivo {PDF, ZIP};
-	//Esto puede ocupar mucha memoria si decodificamos de base64, así que decodificamos los primeros ocho bytes
+	//Esto puede ocupar mucha memoria si decodificamos de base64, asï¿½ que decodificamos los primeros ocho bytes
 	private TipoArchivo tipoArchivo(String contenidoArchivo){
 		TipoArchivo detectado;
 		byte[] pdf = new byte[] {(byte)0x25, (byte)0x50, (byte)0x44, (byte)0x46};
@@ -81,12 +81,12 @@ public class InsertadorEscrituras implements IContextReader{
 	private boolean insertaEscrituraPDF(EscrituraDO idescritura, String escritura, String firmaEscritura, Preferencias pr) throws SystemException
 	{
 		boolean resultado;
-		final String GESTIONAR_SOLICITUD = "S"; //Indica si se gestionará la solicitud al insertar la escritura.
+		final String GESTIONAR_SOLICITUD = "S"; //Indica si se gestionarï¿½ la solicitud al insertar la escritura.
 		EscriturasAncertService srv = new EscriturasAncertService();
 		EscriturasAncert port = srv.getEscriturasAncertPort();
-		//Indicamos dónde va a incluirse.
+		//Indicamos dï¿½nde va a incluirse.
 		String endpoint=pr.getEndpointEscritura();
-		if (endpoint !=null) //Si es nulo, irá a donde diga el servicio en el wsdl.
+		if (endpoint !=null) //Si es nulo, irï¿½ a donde diga el servicio en el wsdl.
 		{
 			javax.xml.ws.BindingProvider bpr = (javax.xml.ws.BindingProvider) port; // enlazador de protocolo para el servicio.
 			bpr.getRequestContext().put (javax.xml.ws.BindingProvider.ENDPOINT_ADDRESS_PROPERTY,endpoint); // Cambiamos el endpoint
@@ -152,11 +152,11 @@ public class InsertadorEscrituras implements IContextReader{
 		Holder<String>codigo   = new Holder<String>();
 		Holder<String>mensaje  = new Holder<String>();
 		//En caso de fichas, podemos decodificar el base64, porque sabemos que 
-		//será pequeño.
+		//serï¿½ pequeï¿½o.
 		byte[] contenidoZip = Base64.decode(escritura.toCharArray());
 		port.altaFicha(datosEscritura, 
 				                           ORIGEN_NOTARIAL, 
-				                           "", //Código de ayuntamiento vinculado, ninguno 
+				                           "", //Cï¿½digo de ayuntamiento vinculado, ninguno 
 				                           idescritura.isAutorizacionEnvioDiligencias()?"S":"N", 
 				                           contenidoZip, 
 				                           esError, 
