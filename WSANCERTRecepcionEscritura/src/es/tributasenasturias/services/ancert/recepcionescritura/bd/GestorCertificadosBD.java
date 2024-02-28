@@ -21,14 +21,15 @@ import es.tributasenasturias.services.ancert.recepcionescritura.utils.General;
 
 
 /**
- * Gestiona la conexión con base de datos necesaria para la operativa con los certificados que vienen
+ * Gestiona la conexiï¿½n con base de datos necesaria para la operativa con los certificados que vienen
  * en mensajes, para comprobar si tienen permisos para utilizar el servicio.
  * @author crubencvs
  *
  */
 public class GestorCertificadosBD implements IContextReader{
 	
-	private final static String TIMEOUT = "60000";
+	//private final static String TIMEOUT = "60000";
+	private static final int TIMEOUT= 60000;
 	private stpa.services.LanzaPLService lanzaderaWS; // Servicio Web
 	private stpa.services.LanzaPL lanzaderaPort; // Port (operaciones) a las que se llamas
 	private Preferencias preferencias;
@@ -42,7 +43,7 @@ public class GestorCertificadosBD implements IContextReader{
 		{
 			conversor=new ConversorParametrosLanzador();
 			LogHelper log=LogFactory.getLogAplicacionContexto(context);
-			//Preparamos las preferencias en función del contexto.
+			//Preparamos las preferencias en funciï¿½n del contexto.
 			preferencias=PreferenciasFactory.newInstance();
 			if (preferencias==null)
 			{
@@ -62,7 +63,7 @@ public class GestorCertificadosBD implements IContextReader{
 				List <Handler> handlerList = bi.getHandlerChain();
 				if (handlerList == null)
 				   handlerList = new ArrayList<Handler>();
-				//El manejador de cliente enviará su log con el mismo id de sesión que el log de aplicación.
+				//El manejador de cliente enviarï¿½ su log con el mismo id de sesiï¿½n que el log de aplicaciï¿½n.
 				handlerList.add(new SoapClientHandler(log.getSessionId(), preferencias));
 				bi.setHandlerChain(handlerList);
 			}
@@ -76,7 +77,7 @@ public class GestorCertificadosBD implements IContextReader{
 				List <Handler> handlerList = bi.getHandlerChain();
 				if (handlerList == null)
 				   handlerList = new ArrayList<Handler>();
-				//El manejador de cliente enviará su log con el mismo id de sesión que el log de aplicación.
+				//El manejador de cliente enviarï¿½ su log con el mismo id de sesiï¿½n que el log de aplicaciï¿½n.
 				handlerList.add(new SoapClientHandler(log.getSessionId(), preferencias));
 				bi.setHandlerChain(handlerList);
 				log.debug ("Se utiliza el endpoint de lanzadera por defecto: " + bpr.getRequestContext().get (javax.xml.ws.BindingProvider.ENDPOINT_ADDRESS_PROPERTY));
@@ -86,7 +87,7 @@ public class GestorCertificadosBD implements IContextReader{
 		{
 			if (!(ex instanceof SystemException))
 			{
-				throw new SystemException ("Problema al preparar la conexión." + ex.getMessage(),ex);
+				throw new SystemException ("Problema al preparar la conexiï¿½n." + ex.getMessage(),ex);
 			}
 		}
 	}
@@ -98,7 +99,7 @@ public class GestorCertificadosBD implements IContextReader{
 				"", "", "", "");
 	}
 	/**
-	 * Método para recuperar la plantilla de consulta de certificado.
+	 * Mï¿½todo para recuperar la plantilla de consulta de certificado.
 	 * @return
 	 * @throws SystemException
 	 */
@@ -127,9 +128,9 @@ public class GestorCertificadosBD implements IContextReader{
 		}
 	}
 	/**
-	 * Método que llama al procedimiento de comprobación de permisos para el servicio.
+	 * Mï¿½todo que llama al procedimiento de comprobaciï¿½n de permisos para el servicio.
 	 * @param cifNif - el NIF/CIF de la persona cuyos permisos sobre el servicio se van a comprobar.
-	 * @return - un valor que indicará el retorno del servicio, si ha sido correcto o no.
+	 * @return - un valor que indicarï¿½ el retorno del servicio, si ha sido correcto o no.
 	 * @throws SystemException
 	 */
 	public PermisosServicio permisoServicio(String cifNif) throws SystemException
@@ -148,7 +149,7 @@ public class GestorCertificadosBD implements IContextReader{
 			errorLlamada= conversor.getNodoResultado("error");
 			if (!errorLlamada.equals(""))
 			{
-				throw new SystemException ("Error producido al consultar el permiso de ejecución del servicio:"+ errorLlamada);
+				throw new SystemException ("Error producido al consultar el permiso de ejecuciï¿½n del servicio:"+ errorLlamada);
 			}
 			String autorizacion = conversor.getNodoResultado("STRING_CADE");
 			PermisosServicio resultado;

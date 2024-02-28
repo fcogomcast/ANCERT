@@ -28,8 +28,9 @@ public class Datos implements IContextReader
 	private final static String STRING1_CANU ="STRING1_CANU";
 	private final static String ERRORNODE = "error";
 	
-	//Tiempo de Timeout. 60 segundos para respuesta de lanzador, no debería tardar más nunca.
-	private final static String TIMEOUT="60000";
+	//Tiempo de Timeout. 60 segundos para respuesta de lanzador, no deberï¿½a tardar mï¿½s nunca.
+	//private final static String TIMEOUT="60000";
+	private static final int TIMEOUT= 60000;
 	private stpa.services.LanzaPLService lanzaderaWS; // Servicio Web
 	private stpa.services.LanzaPL lanzaderaPort; // Port (operaciones) a las que se llamas
 	private ConversorParametrosLanzador conversor;
@@ -84,7 +85,7 @@ public class Datos implements IContextReader
 		}
 		catch (RuntimeException ex)
 		{
-			throw ex; //Esta excepción es grave, no se debería convertir.
+			throw ex; //Esta excepciï¿½n es grave, no se deberï¿½a convertir.
 		}
 		catch (Exception ex)
 		{
@@ -93,10 +94,10 @@ public class Datos implements IContextReader
 	}
 
 	/**
-	 * Devuelve un 'S' si la escritura está duplicada en la tabla, o 'N' si no.
+	 * Devuelve un 'S' si la escritura estï¿½ duplicada en la tabla, o 'N' si no.
 	 * @param idescritura Datos de la escritura.
-	 * @return 'S' si está duplicada, 'N' si no.
-	 * @throws SystemException En caso de que haya un problema al comprobar si la escritura está duplicada
+	 * @return 'S' si estï¿½ duplicada, 'N' si no.
+	 * @throws SystemException En caso de que haya un problema al comprobar si la escritura estï¿½ duplicada
 	 */
 	public String escrituraDuplicada(EscrituraDO idescritura) throws SystemException
 	{
@@ -121,15 +122,15 @@ public class Datos implements IContextReader
 		}
 		catch (RemoteException ex)
 		{
-			throw new SystemException ("Problema al comprobar si la escritura está duplicada.",ex);
+			throw new SystemException ("Problema al comprobar si la escritura estï¿½ duplicada.",ex);
 		}
 	}
 	/**
-	 * Devuelve el id de solicitud, que puede ser el que existía si la solicitud se hizo desde
-	 * EPST, o el que que se ha creado al insertar la solicitud automática si la solicitud se creó
-	 * porque nos llegó una escritura que no habíamos solicitado.
+	 * Devuelve el id de solicitud, que puede ser el que existï¿½a si la solicitud se hizo desde
+	 * EPST, o el que que se ha creado al insertar la solicitud automï¿½tica si la solicitud se creï¿½
+	 * porque nos llegï¿½ una escritura que no habï¿½amos solicitado.
 	 * @param idescritura Datos de la escritura.
-	 * @return Id de solicitud o cadena vacía si no existe
+	 * @return Id de solicitud o cadena vacï¿½a si no existe
 	 * @throws SystemException En caso de que haya un problema al recuperar el id de solicitud
 	 */
 	public String getIdSolicitud(EscrituraDO idescritura) throws SystemException
@@ -159,7 +160,7 @@ public class Datos implements IContextReader
 		}
 		catch (RemoteException ex)
 		{
-			throw new SystemException ("Problema al comprobar si la escritura está duplicada.",ex);
+			throw new SystemException ("Problema al comprobar si la escritura estï¿½ duplicada.",ex);
 		}
 	}
 	public String finalizarRecepcionEscritura(EscrituraDO idescritura) throws SystemException
@@ -185,7 +186,7 @@ public class Datos implements IContextReader
 		}
 		catch (RemoteException ex)
 		{
-			throw new SystemException ("Problema al finalizar la recepción de escritura.",ex);
+			throw new SystemException ("Problema al finalizar la recepciï¿½n de escritura.",ex);
 		}
 	}
 	
@@ -208,7 +209,7 @@ public class Datos implements IContextReader
 		}
 		catch (RemoteException ex)
 		{
-			throw new SystemException ("Problema al comprobar si la escritura está duplicada.",ex);
+			throw new SystemException ("Problema al comprobar si la escritura estï¿½ duplicada.",ex);
 		}
 	}
 	private String Ejecuta() throws RemoteException
@@ -220,9 +221,9 @@ public class Datos implements IContextReader
 				"", "", "", "");
 	}
 	/**
-	 * Método que devuelve el error en la ultima llamada a un procedimiento de esta clase.
+	 * Mï¿½todo que devuelve el error en la ultima llamada a un procedimiento de esta clase.
 	 * Los errores en llamada son devueltos en formato XML, este procedimiento devuelve el error
-	 * extraído en formato de cadena.
+	 * extraï¿½do en formato de cadena.
 	 * @return
 	 */
 	public String getErrorLlamada() {
