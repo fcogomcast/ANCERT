@@ -55,6 +55,12 @@ war {
         into 'WEB-INF/classes/es/tributasenasturias/servicios/ibi/deuda/wsdl'
     }
 
+    from('src/es/tributasenasturias/servicios/ibi/deuda/wsdl') {
+        include '**/*'
+        into 'WEB-INF/classes/es/tributasenasturias/servicios/ibi/deuda/wsdl'
+    }
+
+
     // Agrega solo los archivos XML de la carpeta WEB-INF
     webInf {
         from 'webcontent/WEB-INF', {
